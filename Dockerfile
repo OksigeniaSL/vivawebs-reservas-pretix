@@ -5,7 +5,7 @@ FROM pretix/standalone:2026.8.0
 USER root
 
 # Arreglo: pretix no tenía en cuenta la subcarpeta /reservas/ en tres comparaciones (el panel de cada
-# evento daba error). Enviado a pretix; si cambian esas líneas en una versión nueva, el build falla.
+# evento daba error). Es un fallo de pretix; si cambian esas líneas en una versión nueva, el build falla.
 COPY parches.py /tmp/parches.py
 RUN python3 /tmp/parches.py && rm /tmp/parches.py
 

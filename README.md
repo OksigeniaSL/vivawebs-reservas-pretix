@@ -9,7 +9,7 @@ Este es el código de la versión de [pretix](https://pretix.eu/) con la que fun
 | Fichero | Qué es |
 |---|---|
 | `Dockerfile` | Parte de la imagen oficial `pretix/standalone:2026.8.0` y le añade lo de abajo. |
-| `parches.py` | **Único cambio en el código de pretix**: tres comparaciones de la ruta (`request.path`) pasan a `request.path_info`, como hace el resto de pretix. Sin esto, instalado en una subcarpeta (`/reservas/`), el panel de cada evento daba error 500. Enviado a pretix para que lo incorporen. |
+| `parches.py` | **Único cambio en el código de pretix**: tres comparaciones de la ruta (`request.path`) pasan a `request.path_info`, como hace el resto de pretix. Sin esto, instalado en una subcarpeta (`/reservas/`), el panel de cada evento daba error 500. Es un fallo de pretix: cuando lo corrijan, este parche desaparece. |
 | `production_settings.py` | Ajustes de Django: pretix vive en `/reservas/` (`FORCE_SCRIPT_NAME`), también en los enlaces de los correos; en las demos no se envía ningún correo. |
 | `pretixtask.conf` | Un solo proceso de tareas por negocio (por defecto arranca uno por procesador). |
 | `pretix-vivawebs/` | Nuestro complemento (AGPLv3): comprobación anti-robots invisible (Cloudflare Turnstile) al reservar, recordatorio por correo el día antes, tipografía del negocio, descarga de las reservas en CSV, redirección de `/reservas/` a la página de reservas e instalación sin formularios (`vw_configurar`). |
@@ -24,4 +24,4 @@ pretix es © pretix GmbH y colaboradores, bajo GNU AGPLv3 con las condiciones ad
 
 ---
 
-*English:* This is the source code of the pretix-based booking service run by VivaWebs (Oksigenia S.L.), published to comply with pretix's AGPLv3 license. It is pretix 2026.8.0 plus: a one-line fix for running under a URL path prefix (submitted upstream), Django settings for the `/reservas/` prefix, our plugin `pretix-vivawebs`, and a Spanish (Spain) translation adapted to bookings. Not an official pretix distribution.
+*English:* This is the source code of the pretix-based booking service run by VivaWebs (Oksigenia S.L.), published to comply with pretix's AGPLv3 license. It is pretix 2026.8.0 plus: a one-line fix for running under a URL path prefix, Django settings for the `/reservas/` prefix, our plugin `pretix-vivawebs`, and a Spanish (Spain) translation adapted to bookings. Not an official pretix distribution.
