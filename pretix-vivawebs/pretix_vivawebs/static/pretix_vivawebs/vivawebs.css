@@ -1,0 +1,8 @@
+/* VivaWebs: la tipografía de la web del negocio en su página de reservas. Las variables (--vw-display,
+   --vw-body) vienen de vw/marca.css; las fuentes, de /vendor/fonts/ de su propio dominio. El color
+   principal lo pone pretix con su ajuste de color. */
+body { font-family: var(--vw-body, inherit); }
+h1, h2, h3, h4, .page-header h1 { font-family: var(--vw-display, inherit); letter-spacing: -0.01em; }
+
+/* Se paga en el local (pago manual, la única forma de pago): no hay pago que «reintentar». */
+a.btn[href*="/pay/change"] { display: none; }

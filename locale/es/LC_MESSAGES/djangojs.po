@@ -1,0 +1,864 @@
+# Traducción de pretix al español de España para el servicio de reservas de VivaWebs (Oksigenia S.L.).
+# Tuteo al cliente y vocabulario de reservas. Generada con ops/reservas/pretix/traducir.py; licencia AGPLv3.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-30 07:26+0000\n"
+"PO-Revision-Date: 2026-06-29 17:00+0000\n"
+"Last-Translator: CVZ-es <damien.bremont@casadevelazquez.org>\n"
+"Language-Team: Spanish <https://translate.pretix.eu/projects/pretix/pretix-"
+"js/es/>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.1\n"
+
+msgid "Marked as paid"
+msgstr "Marcado como pagado"
+
+msgid "Comment:"
+msgstr "Comentario:"
+
+msgid "PayPal"
+msgstr "PayPal"
+
+msgid "Venmo"
+msgstr "Venmo"
+
+msgid "Apple Pay"
+msgstr "Apple Pay"
+
+msgid "Itaú"
+msgstr "Itaú"
+
+msgid "PayPal Credit"
+msgstr "PayPal Credit"
+
+msgid "Credit Card"
+msgstr "Tarjeta de crédito"
+
+msgid "PayPal Pay Later"
+msgstr "PayPal Paga Después"
+
+msgid "iDEAL | Wero"
+msgstr "iDEAL | Wero"
+
+msgid "SEPA Direct Debit"
+msgstr "Domiciliación bancaria SEPA"
+
+msgid "Bancontact"
+msgstr "Bancontact"
+
+msgid "giropay"
+msgstr "giropay"
+
+msgid "SOFORT"
+msgstr "SOFORT"
+
+msgid "eps"
+msgstr "eps"
+
+msgid "MyBank"
+msgstr "MyBank"
+
+msgid "Przelewy24"
+msgstr "Przelewy24"
+
+msgid "Verkkopankki"
+msgstr "Verkkopankki"
+
+msgid "PayU"
+msgstr "PayU"
+
+msgid "BLIK"
+msgstr "BLIK"
+
+msgid "Trustly"
+msgstr "Trustly"
+
+msgid "Zimpler"
+msgstr "Zimpler"
+
+msgid "Maxima"
+msgstr "Maxima"
+
+msgid "OXXO"
+msgstr "OXXO"
+
+msgid "Boleto"
+msgstr "Boleto"
+
+msgid "WeChat Pay"
+msgstr "WeChat Pay"
+
+msgid "Mercado Pago"
+msgstr "Mercado Pago"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Confirming your payment …"
+msgstr "Confirmando tu pago…"
+
+msgid "Payment method unavailable"
+msgstr "Forma de pago no disponible"
+
+msgid "Placed orders"
+msgstr "Reservas realizadas"
+
+msgid "Paid orders"
+msgstr "Reservas pagadas"
+
+msgid "Attendees (ordered)"
+msgstr "Participantes (reservados)"
+
+msgid "Attendees (paid)"
+msgstr "Participantes (pagados)"
+
+msgid "Total revenue"
+msgstr "Ingresos totales"
+
+msgid "Contacting Stripe …"
+msgstr "Contactando con Stripe…"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Contacting your bank …"
+msgstr "Contactando con tu banco…"
+
+msgid "Select a check-in list"
+msgstr "Selecciona una lista de registro"
+
+msgid "No active check-in lists found."
+msgstr "No se encontraron listas de registro activas."
+
+msgid "Switch check-in list"
+msgstr "Cambiar lista de registro"
+
+msgid "Search results"
+msgstr "Resultados de la búsqueda"
+
+msgid "No tickets found"
+msgstr "No se encontraron plazas"
+
+msgid "Result"
+msgstr "Resultado"
+
+msgid "This ticket requires special attention"
+msgstr "Esta plaza requiere atención especial"
+
+msgid "Switch direction"
+msgstr "Cambiar dirección"
+
+msgid "Entry"
+msgstr "Entrada"
+
+msgid "Exit"
+msgstr "Salida"
+
+msgid "Scan a ticket or search and press return…"
+msgstr "Escanea una plaza o busca y pulsa intro…"
+
+msgid "Load more"
+msgstr "Cargar más"
+
+msgid "Valid"
+msgstr "Válido"
+
+msgid "Unpaid"
+msgstr "Pendiente de pago"
+
+msgid "Canceled"
+msgstr "Cancelado"
+
+msgid "Confirmed"
+msgstr "Confirmado"
+
+msgid "Approval pending"
+msgstr "Pendiente de aprobación"
+
+msgid "Redeemed"
+msgstr "Canjeado"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Ticket not paid"
+msgstr "Plaza sin pagar"
+
+msgid "This ticket is not yet paid. Do you want to continue anyways?"
+msgstr "Esta plaza aún no está pagada. ¿Continuar de todos modos?"
+
+msgid "Additional information required"
+msgstr "Se requiere información adicional"
+
+msgid "Valid ticket"
+msgstr "Plaza válida"
+
+msgid "Exit recorded"
+msgstr "Salida registrada"
+
+msgid "Ticket already used"
+msgstr "Esta plaza ya fue utilizada"
+
+msgid "Information required"
+msgstr "Información requerida"
+
+msgid "Unknown ticket"
+msgstr "Plaza desconocida"
+
+msgid "Ticket type not allowed here"
+msgstr "Tipo de plaza no permitido aquí"
+
+msgid "Entry not allowed"
+msgstr "Entrada no permitida"
+
+msgid "Ticket code revoked/changed"
+msgstr "Código de plaza revocado/cambiado"
+
+msgid "Ticket blocked"
+msgstr "Plaza bloqueada"
+
+msgid "Ticket not valid at this time"
+msgstr "Plaza no válida en este momento"
+
+msgid "Order canceled"
+msgstr "Reserva cancelada"
+
+msgid "Ticket code is ambiguous on list"
+msgstr "El código de la plaza es ambiguo en la lista"
+
+msgid "Order not approved"
+msgstr "Reserva no aprobada"
+
+msgid "Checked-in Tickets"
+msgstr "Plazas registradas"
+
+msgid "Valid Tickets"
+msgstr "Plazas válidas"
+
+msgid "Currently inside"
+msgstr "Actualmente dentro"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "No"
+msgstr "No"
+
+msgid "close"
+msgstr "cerrar"
+
+msgid "required"
+msgstr "obligatorio"
+
+msgid "Your request is currently being processed. Depending on the size of your event, this might take up to a few minutes."
+msgstr "La solicitud se está procesando. Esto puede tardar varios minutos, dependiendo del tamaño de la agenda."
+
+msgid "Your request has been queued on the server and will soon be processed."
+msgstr "La solicitud se ha enviado al servidor y será procesada en breve."
+
+msgid "Your request arrived on the server but we still wait for it to be processed. If this takes longer than two minutes, please contact us or go back in your browser and try again."
+msgstr "La solicitud llegó al servidor pero se está esperando a que sea procesada. Si tarda más de dos minutos, ponte en contacto o vuelve atrás en el navegador e inténtalo de nuevo."
+
+msgid "An error of type {code} occurred."
+msgstr "Ha ocurrido un error de tipo {code}."
+
+msgid "We currently cannot reach the server, but we keep trying. Last error code: {code}"
+msgstr "No se puede contactar con el servidor, pero se sigue intentando. Último código de error: {code}"
+
+msgid "The request took too long. Please try again."
+msgstr "La solicitud ha tardado demasiado. Inténtalo de nuevo."
+
+msgid "We currently cannot reach the server. Please try again. Error code: {code}"
+msgstr "No se puede contactar con el servidor. Inténtalo de nuevo. Código de error: {code}"
+
+msgid "We are processing your request …"
+msgstr "Procesando la solicitud…"
+
+msgid "We are currently sending your request to the server. If this takes longer than one minute, please check your internet connection and then reload this page and try again."
+msgstr "Se está enviando la solicitud al servidor. Si tarda más de un minuto, comprueba la conexión a internet, recarga la página e inténtalo de nuevo."
+
+msgid "If this takes longer than a few minutes, please contact us."
+msgstr "Si tarda más de unos minutos, ponte en contacto."
+
+msgid "Close message"
+msgstr "Cerrar mensaje"
+
+msgid "Copied!"
+msgstr "¡Copiado!"
+
+msgid "Press Ctrl-C to copy!"
+msgstr "¡Pulsa Ctrl-C para copiar!"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Visualize"
+msgstr "Visualizar"
+
+msgid "Your rule always filters by product or variation, but the following products or variations are not contained in any of your rule parts so people with these tickets will not get in:"
+msgstr "La regla siempre filtra por servicio o variante, pero los siguientes servicios o variantes no están incluidos en ninguna parte de la regla, por lo que las personas con estas plazas no podrán acceder:"
+
+msgid "Please double-check if this was intentional."
+msgstr "Comprueba si esto era intencionado."
+
+msgid "All of the conditions below (AND)"
+msgstr "Todas las siguientes condiciones (Y)"
+
+msgid "At least one of the conditions below (OR)"
+msgstr "Al menos una de las siguientes condiciones (O)"
+
+msgid "Event start"
+msgstr "Inicio de la sesión"
+
+msgid "Event end"
+msgstr "Fin de la sesión"
+
+msgid "Event admission"
+msgstr "Admisión a la sesión"
+
+msgid "custom date and time"
+msgstr "seleccionar fecha y hora"
+
+msgid "custom time"
+msgstr "seleccionar hora"
+
+msgid "Tolerance (minutes)"
+msgstr "Tolerancia (en minutos)"
+
+msgid "Add condition"
+msgstr "Añadir condición"
+
+msgid "minutes"
+msgstr "minutos"
+
+msgid "Duplicate"
+msgstr "Duplicar"
+
+msgctxt "entry_status"
+msgid "present"
+msgstr "presente"
+
+msgctxt "entry_status"
+msgid "absent"
+msgstr "ausente"
+
+msgid "is one of"
+msgstr "es uno de"
+
+msgid "is before"
+msgstr "está antes"
+
+msgid "is after"
+msgstr "está después"
+
+msgid "="
+msgstr "="
+
+msgid "Product"
+msgstr "Servicio"
+
+msgid "Product variation"
+msgstr "Variación del servicio"
+
+msgid "Gate"
+msgstr "Puerta"
+
+msgid "Current date and time"
+msgstr "Fecha y hora actual"
+
+msgid "Current day of the week (1 = Monday, 7 = Sunday)"
+msgstr "Día de la semana actual (1 = lunes, 7 = domingo)"
+
+msgid "Current entry status"
+msgstr "Estado de registro actual"
+
+msgid "Number of previous entries"
+msgstr "Número de registros previos"
+
+msgid "Number of previous entries since midnight"
+msgstr "Número de registros previos desde medianoche"
+
+msgid "Number of previous entries since"
+msgstr "Número de registros desde"
+
+msgid "Number of previous entries before"
+msgstr "Número de registros antes de"
+
+msgid "Number of days with a previous entry"
+msgstr "Número de días con un registro previo"
+
+msgid "Number of days with a previous entry since"
+msgstr "Número de días con un registro desde"
+
+msgid "Number of days with a previous entry before"
+msgstr "Número de días con un registro antes de"
+
+msgid "Minutes since last entry (-1 on first entry)"
+msgstr "Minutos desde último registro (-1 para el primer registro)"
+
+msgid "Minutes since first entry (-1 on first entry)"
+msgstr "Minutos desde el primer registro (-1 para el primer registro)"
+
+msgid "Error: Product not found!"
+msgstr "Error: ¡Servicio no encontrado!"
+
+msgid "Error: Variation not found!"
+msgstr "Error: ¡Variación no encontrada!"
+
+msgid "Check-in QR"
+msgstr "QR de registro de llegada"
+
+msgid "The PDF background file could not be loaded for the following reason:"
+msgstr "El archivo PDF de fondo no ha podido cargarse por el siguiente motivo:"
+
+msgid "Group of objects"
+msgstr "Grupo de objetos"
+
+msgid "Text object (deprecated)"
+msgstr "Objeto texto (obsoleto)"
+
+msgid "Text box"
+msgstr "Campo de texto"
+
+msgid "Barcode area"
+msgstr "Área para código de barras"
+
+msgid "Image area"
+msgstr "Área de imagen"
+
+msgid "Powered by pretix"
+msgstr "Proveído por pretix"
+
+msgid "Object"
+msgstr "Objeto"
+
+msgid "Ticket design"
+msgstr "Diseño del justificante"
+
+msgid "Saving failed."
+msgstr "El guardado falló."
+
+msgid "Error while uploading your PDF file, please try again."
+msgstr "Ha ocurrido un error al cargar el archivo PDF, inténtalo de nuevo."
+
+msgid "Do you really want to leave the editor without saving your changes?"
+msgstr "¿Realmente quieres salir del editor sin guardar los cambios?"
+
+msgid "An error has occurred."
+msgstr "Ha ocurrido un error."
+
+msgid "Generating messages …"
+msgstr "Generando mensajes…"
+
+msgid "Unknown error."
+msgstr "Error desconocido."
+
+msgid "Your color has great contrast and will provide excellent accessibility."
+msgstr "El color tiene un gran contraste y proporcionará una excelente accesibilidad."
+
+msgid "Your color has decent contrast and is sufficient for minimum accessibility requirements."
+msgstr "El color tiene un contraste decente y es suficiente para los requisitos mínimos de accesibilidad."
+
+msgid "Your color has insufficient contrast to white. Accessibility of your site will be impacted."
+msgstr "El color no tiene suficiente contraste con el blanco. La accesibilidad del sitio se verá afectada."
+
+msgid "Search query"
+msgstr "Consulta de búsqueda"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "None"
+msgstr "Ninguno"
+
+msgid "Selected only"
+msgstr "Solo seleccionados"
+
+msgid "Enter page number between 1 and %(max)s."
+msgstr "Introduce un número de página entre 1 y %(max)s."
+
+msgid "Invalid page number."
+msgstr "Número de página inválido."
+
+msgid "Use a different name internally"
+msgstr "Usar un nombre diferente internamente"
+
+msgid "Click to close"
+msgstr "Haz clic para cerrar"
+
+msgid "You have unsaved changes!"
+msgstr "Hay cambios sin guardar"
+
+msgid "Calculating default price…"
+msgstr "Calculando precio predeterminado…"
+
+msgid "No results"
+msgstr "No hay resultados"
+
+msgid "Others"
+msgstr "Otros"
+
+msgid "Count"
+msgstr "Cantidad"
+
+msgid "(one more date)"
+msgid_plural "({num} more dates)"
+msgstr[0] "(una sesión más)"
+msgstr[1] "({num} sesiones más)"
+
+msgid "The items in your cart are no longer reserved for you. You can still complete your order as long as they’re available."
+msgstr "Los servicios en tu selección ya no están reservados para ti. Puedes continuar con la reserva siempre que estén disponibles."
+
+msgid "Cart expired"
+msgstr "Tu selección ha caducado"
+
+msgid "Your cart is about to expire."
+msgstr "Tu selección está a punto de caducar."
+
+msgid "The items in your cart are reserved for you for one minute."
+msgid_plural "The items in your cart are reserved for you for {num} minutes."
+msgstr[0] "Los servicios en tu selección están reservados durante un minuto."
+msgstr[1] "Los servicios en tu selección están reservados durante {num} minutos."
+
+msgid "Your cart has expired."
+msgstr "Tu selección ha caducado."
+
+msgid "The items in your cart are no longer reserved for you. You can still complete your order as long as they're available."
+msgstr "Los servicios en tu selección ya no están reservados para ti. Puedes continuar con la reserva siempre que estén disponibles."
+
+msgid "Do you want to renew the reservation period?"
+msgstr "¿Quieres renovar el periodo de reserva?"
+
+msgid "Renew reservation"
+msgstr "Renovar reserva"
+
+msgid "The organizer keeps %(currency)s %(amount)s"
+msgstr "El negocio retiene %(currency)s %(amount)s"
+
+msgid "You get %(currency)s %(amount)s back"
+msgstr "Se te devolverán %(amount)s %(currency)s"
+
+msgid "Please enter the amount the organizer can keep."
+msgstr "Introduce el importe que el negocio puede retener."
+
+msgid "Your local time:"
+msgstr "Tu hora local:"
+
+msgid "Google Pay"
+msgstr "Google Pay"
+
+msgctxt "widget"
+msgid "Quantity"
+msgstr "Cantidad"
+
+msgctxt "widget"
+msgid "Decrease quantity"
+msgstr "Reducir cantidad"
+
+msgctxt "widget"
+msgid "Increase quantity"
+msgstr "Aumentar cantidad"
+
+msgctxt "widget"
+msgid "Filter events by"
+msgstr "Filtrar sesiones por"
+
+msgctxt "widget"
+msgid "Filter"
+msgstr "Filtrar"
+
+msgctxt "widget"
+msgid "Price"
+msgstr "Precio"
+
+msgctxt "widget"
+msgid "Original price: %s"
+msgstr "Precio original: %s"
+
+msgctxt "widget"
+msgid "New price: %s"
+msgstr "Precio nuevo: %s"
+
+msgctxt "widget"
+msgid "Select"
+msgstr "Seleccionar"
+
+msgctxt "widget"
+msgid "Select %s"
+msgstr "Seleccionar %s"
+
+msgctxt "widget"
+msgid "Select variant %s"
+msgstr "Seleccionar variante %s"
+
+msgctxt "widget"
+msgid "Sold out"
+msgstr "Completo"
+
+msgctxt "widget"
+msgid "Buy"
+msgstr "Reservar"
+
+msgctxt "widget"
+msgid "Register"
+msgstr "Registrarse"
+
+msgctxt "widget"
+msgid "Reserved"
+msgstr "Reservado"
+
+msgctxt "widget"
+msgid "FREE"
+msgstr "GRATIS"
+
+msgctxt "widget"
+msgid "from %(currency)s %(price)s"
+msgstr "desde %(currency)s %(price)s"
+
+msgctxt "widget"
+msgid "Image of %s"
+msgstr "Imagen de %s"
+
+msgctxt "widget"
+msgid "incl. %(rate)s% %(taxname)s"
+msgstr "incl. %(rate)s% %(taxname)s"
+
+msgctxt "widget"
+msgid "plus %(rate)s% %(taxname)s"
+msgstr "más %(rate)s% %(taxname)s"
+
+msgctxt "widget"
+msgid "incl. taxes"
+msgstr "incl. impuestos"
+
+msgctxt "widget"
+msgid "plus taxes"
+msgstr "más impuestos"
+
+msgctxt "widget"
+msgid "currently available: %s"
+msgstr "disponible actualmente: %s"
+
+msgctxt "widget"
+msgid "Only available with a voucher"
+msgstr "Solo disponible con código"
+
+msgctxt "widget"
+msgid "Not yet available"
+msgstr "Aún no disponible"
+
+msgctxt "widget"
+msgid "Not available anymore"
+msgstr "Ya no disponible"
+
+msgctxt "widget"
+msgid "Currently not available"
+msgstr "No disponible actualmente"
+
+msgctxt "widget"
+msgid "minimum amount to order: %s"
+msgstr "cantidad mínima a reservar: %s"
+
+msgctxt "widget"
+msgid "Close ticket shop"
+msgstr "Cerrar página de reservas"
+
+msgctxt "widget"
+msgid "The ticket shop could not be loaded."
+msgstr "No se ha podido cargar la página de reservas."
+
+msgctxt "widget"
+msgid "There are currently a lot of users in this ticket shop. Please open the shop in a new tab to continue."
+msgstr "Hay muchos usuarios en esta página de reservas. Abre la página en una nueva pestaña para continuar."
+
+msgctxt "widget"
+msgid "Open ticket shop"
+msgstr "Abrir página de reservas"
+
+msgctxt "widget"
+msgid "Checkout"
+msgstr "Continuar con la reserva"
+
+msgctxt "widget"
+msgid "The cart could not be created. Please try again later"
+msgstr "No se ha podido crear tu selección. Inténtalo de nuevo más tarde"
+
+msgctxt "widget"
+msgid "We could not create your cart, since there are currently too many users in this ticket shop. Please click \"Continue\" to retry in a new tab."
+msgstr "No se ha podido crear tu selección porque hay muchos usuarios en esta página de reservas. Haz clic en «Continuar» para reintentar en una nueva pestaña."
+
+msgctxt "widget"
+msgid "Waiting list"
+msgstr "Lista de espera"
+
+msgctxt "widget"
+msgid "You currently have an active cart for this event. If you select more products, they will be added to your existing cart."
+msgstr "Tienes una selección activa para esta agenda. Si añades más servicios, se agregarán a tu selección actual."
+
+msgctxt "widget"
+msgid "Resume checkout"
+msgstr "Continuar con la reserva"
+
+msgctxt "widget"
+msgid "Redeem a voucher"
+msgstr "Canjear un código"
+
+msgctxt "widget"
+msgid "Redeem"
+msgstr "Canjear"
+
+msgctxt "widget"
+msgid "Voucher code"
+msgstr "Código"
+
+msgctxt "widget"
+msgid "Close"
+msgstr "Cerrar"
+
+msgctxt "widget"
+msgid "Close checkout"
+msgstr "Cerrar reserva"
+
+msgctxt "widget"
+msgid "You cannot cancel this operation. Please wait for loading to finish."
+msgstr "No puedes cancelar esta operación. Espera a que finalice la carga."
+
+msgctxt "widget"
+msgid "Continue"
+msgstr "Continuar"
+
+msgctxt "widget"
+msgid "Show variants"
+msgstr "Mostrar variantes"
+
+msgctxt "widget"
+msgid "Hide variants"
+msgstr "Ocultar variantes"
+
+msgctxt "widget"
+msgid "Choose a different event"
+msgstr "Elegir una agenda diferente"
+
+msgctxt "widget"
+msgid "Choose a different date"
+msgstr "Elegir una fecha diferente"
+
+msgctxt "widget"
+msgid "Back"
+msgstr "Atrás"
+
+msgctxt "widget"
+msgid "Next month"
+msgstr "Siguiente mes"
+
+msgctxt "widget"
+msgid "Previous month"
+msgstr "Mes anterior"
+
+msgctxt "widget"
+msgid "Next week"
+msgstr "Semana siguiente"
+
+msgctxt "widget"
+msgid "Previous week"
+msgstr "Semana anterior"
+
+msgctxt "widget"
+msgid "Open seat selection"
+msgstr "Abrir selección de asientos"
+
+msgctxt "widget"
+msgid "Some or all ticket categories are currently sold out. If you want, you can add yourself to the waiting list. We will then notify if seats are available again."
+msgstr "Algunos o todos los servicios están completos. Si quieres, puedes añadirte a la lista de espera. Te notificaremos si hay plazas disponibles de nuevo."
+
+msgctxt "widget"
+msgid "Load more"
+msgstr "Cargar más"
+
+msgid "Mo"
+msgstr "Lun"
+
+msgid "Tu"
+msgstr "Mar"
+
+msgid "We"
+msgstr "Mié"
+
+msgid "Th"
+msgstr "Jue"
+
+msgid "Fr"
+msgstr "Vie"
+
+msgid "Sa"
+msgstr "Sáb"
+
+msgid "Su"
+msgstr "Dom"
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Wednesday"
+msgstr "Miércoles"
+
+msgid "Thursday"
+msgstr "Jueves"
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "January"
+msgstr "Enero"
+
+msgid "February"
+msgstr "Febrero"
+
+msgid "March"
+msgstr "Marzo"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Mayo"
+
+msgid "June"
+msgstr "Junio"
+
+msgid "July"
+msgstr "Julio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Septiembre"
+
+msgid "October"
+msgstr "Octubre"
+
+msgid "November"
+msgstr "Noviembre"
+
+msgid "December"
+msgstr "Diciembre"

@@ -1,0 +1,19 @@
+{
+  "horario": {"dias": [0, 1, 2, 3, 4], "desde": "15:30", "hasta": "20:30", "minutos": 60},
+  "recursos": [
+    {"nombre": "Cabinas", "cantidad": 3},
+    {"nombre": "Terapeutas", "cantidad": 2},
+    {"nombre": "Sauna", "cantidad": 1},
+    {"nombre": "Presoterapia", "cantidad": 1}
+  ],
+  "servicios": [
+    {"nombre": "Masaje relajante", "precio": 45, "usa": ["Cabinas", "Terapeutas"],
+     "descripcion": "Una hora de masaje con aceites esenciales."},
+    {"nombre": "Electroestimulación", "precio": 35, "usa": ["Cabinas"],
+     "descripcion": "45 minutos en cabina. Te colocamos los electrodos al empezar y te los quitamos al acabar."},
+    {"nombre": "Sauna de infrarrojos", "precio": 20, "usa": ["Sauna"],
+     "descripcion": "30 minutos de sauna individual."},
+    {"nombre": "Presoterapia", "precio": 25, "usa": ["Presoterapia"],
+     "descripcion": "45 minutos en el sillón de presoterapia."}
+  ]
+}

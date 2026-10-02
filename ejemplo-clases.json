@@ -1,0 +1,10 @@
+{
+  "servicios": [
+    {"nombre": "Yoga suave", "precio": 12, "plazas": 12, "duracion": 75, "dias": [0, 2], "hora": "19:00",
+     "descripcion": "75 minutos para todos los niveles. Trae ropa cómoda: las esterillas las ponemos nosotros."},
+    {"nombre": "Pilates", "precio": 12, "plazas": 10, "duracion": 60, "dias": [1, 3], "hora": "18:00",
+     "descripcion": "Una hora de pilates en suelo, en grupos reducidos."},
+    {"nombre": "Taller de cerámica", "precio": 35, "plazas": 8, "duracion": 150, "dias": [5], "hora": "10:00",
+     "descripcion": "Dos horas y media para hacer tu primera pieza en el torno. Material incluido."}
+  ]
+}

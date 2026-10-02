@@ -1,0 +1,22 @@
+[project]
+name = "pretix-vivawebs"
+version = "1.0.0"
+description = "Reservas de VivaWebs sobre pretix: comprobación anti-robots, recordatorios, marca del negocio, descarga de reservas e instalación sin formularios."
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+authors = [{name = "Oksigenia S.L.", email = "legal@vivawebs.com"}]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.entry-points."pretix.plugin"]
+pretix_vivawebs = "pretix_vivawebs:PretixPluginMeta"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pretix_vivawebs*"]
+
+[tool.setuptools.package-data]
+pretix_vivawebs = ["static/pretix_vivawebs/*"]
