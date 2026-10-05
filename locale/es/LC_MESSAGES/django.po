@@ -18283,7 +18283,7 @@ msgid "This ticket shop is currently in test mode."
 msgstr "Ejemplo de VivaWebs: las reservas de esta página no son reales."
 
 msgid "Please do not perform any real purchases as your order might be deleted without notice."
-msgstr "Pruébala como si fueras un cliente: lo que reserves aquí se borra cada noche."
+msgstr "Pruébala como si fueras un cliente: no se envía ningún correo y lo que reserves aquí se borra cada noche."
 
 msgid "You are currently using the time machine. The ticket shop is rendered as if it were %(datetime)s."
 msgstr "Actualmente estás usando la máquina del tiempo. La página de reservas se muestra como si fuera %(datetime)s."
