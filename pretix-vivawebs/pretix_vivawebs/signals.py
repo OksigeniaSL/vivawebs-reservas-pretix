@@ -15,7 +15,9 @@ from django.utils.timezone import now
 from django_scopes import scopes_disabled
 from pretix.base.middleware import add_to_response_csp
 from pretix.base.signals import periodic_task
-from pretix.presale.signals import contact_form_fields, html_head, html_page_header, process_response
+from pretix.presale.signals import (
+    contact_form_fields, global_html_head, global_html_page_header, html_head, process_response,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -39,24 +41,37 @@ def _en_reserva(request):
 
 # ─── Marca del negocio y comprobación anti-robots en la cabecera ───────────────────────────────
 
-@receiver(html_head, dispatch_uid="vivawebs_html_head")
-def cabecera(sender, request=None, **kwargs):
+@receiver(global_html_head, dispatch_uid="vivawebs_global_html_head")
+def hojas(sender, request=None, **kwargs):
+    """Our skin and the business's brand on every page: the event pages and also the organizer ones (log in,
+    customer account), which do not get the event signals."""
     partes = [format_html('<link rel="stylesheet" href="{}">', static("pretix_vivawebs/vivawebs.css"))]
     if os.path.isfile(MARCA):
         partes.append(format_html('<link rel="stylesheet" href="/vendor/fonts/fonts.css">'
                                   '<link rel="stylesheet" href="{}vw/marca.css?m={}">',
                                   settings.MEDIA_URL, int(os.path.getmtime(MARCA))))
+    return "".join(partes)
+
+
+@receiver(html_head, dispatch_uid="vivawebs_html_head")
+def cabecera(sender, request=None, **kwargs):
+    partes = []
     if request is not None and _en_reserva(request) and _sitekey():
         partes.append(format_html('<script src="{}/turnstile/v0/api.js?render=explicit" async defer></script>', CLOUDFLARE))
         partes.append(format_html('<script src="{}" defer></script>', static("pretix_vivawebs/captcha.js")))
     return "".join(partes)
 
 
-@receiver(html_page_header, dispatch_uid="vivawebs_cuenta_prueba")
+@receiver(global_html_page_header, dispatch_uid="vivawebs_cuenta_prueba")
 def cuenta_prueba(sender, request=None, **kwargs):
-    """Demos with passes: the test account on every page, also on the checkout step that asks to log in."""
-    cuenta = sender.organizer.settings.get("vw_cuenta_prueba_datos", as_type=dict)
-    if not sender.testmode or not cuenta:
+    """Demos with passes: the test account on every page, also on the checkout step and the page that ask to
+    log in. Only demos set vw_cuenta_prueba_datos; an event out of test mode never shows it."""
+    org = getattr(request, "organizer", None)
+    if org is None:
+        return ""
+    cuenta = org.settings.get("vw_cuenta_prueba_datos", as_type=dict)
+    ev = getattr(request, "event", None)
+    if not cuenta or (ev is not None and not ev.testmode):
         return ""
     return format_html('<p class="vw-prueba">Para reservar con bono sin comprarlo, entra con la cuenta de prueba: '
                        'correo <strong>{}</strong>, contraseña <strong>{}</strong>. Tiene un bono de cada tipo.</p>',
