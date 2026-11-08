@@ -733,7 +733,7 @@ msgid "Customers"
 msgstr "Clientes"
 
 msgid "Memberships"
-msgstr "Suscripciones"
+msgstr "Bonos"
 
 msgid "Customer ID"
 msgstr "ID de cliente"
@@ -784,7 +784,7 @@ msgid "Canceled"
 msgstr "Cancelada"
 
 msgid "Membership type"
-msgstr "Tipo de suscripción"
+msgstr "Tipo de bono"
 
 msgid "Purchase ticket"
 msgstr "Reservar plaza"
@@ -1097,10 +1097,10 @@ msgid "This product is a gift card"
 msgstr "Este servicio es una tarjeta regalo"
 
 msgid "Require a valid membership"
-msgstr "Requiere una membresía válida"
+msgstr "Requiere un bono válido"
 
 msgid "Hide without a valid membership"
-msgstr "Ocultar sin una membresía válida"
+msgstr "Ocultar sin un bono válido"
 
 msgid "Order data"
 msgstr "Datos de la reserva"
@@ -2949,22 +2949,22 @@ msgid "When a customer buys this product, they will get a gift card with a value
 msgstr "Cuando un cliente reserve este servicio, recibirá una tarjeta regalo con un valor equivalente al precio del servicio."
 
 msgid "Allowed membership types"
-msgstr "Tipos de suscripción admitidos"
+msgstr "Tipos de bono admitidos"
 
 msgid "Do not show this unless the customer is logged in and has a valid membership. Be aware that this means it will never be visible in the widget."
-msgstr "No mostrar esto a menos que el cliente haya iniciado sesión y tenga una suscripción válida. Ten en cuenta que esto significa que nunca será visible en el widget."
+msgstr "No mostrar esto a menos que el cliente haya iniciado sesión y tenga un bono válido. Ten en cuenta que esto significa que nunca será visible en el widget."
 
 msgid "This product creates a membership of type"
-msgstr "Este servicio crea una suscripción de tipo"
+msgstr "Este servicio crea un bono de tipo"
 
 msgid "The duration of the membership is the same as the duration of the event or event series date"
-msgstr "La duración de la suscripción es la misma que la duración de la sesión de la agenda"
+msgstr "La duración del bono es la misma que la duración de la sesión de la agenda"
 
 msgid "Membership duration in days"
-msgstr "Duración de la suscripción en días"
+msgstr "Duración del bono en días"
 
 msgid "Membership duration in months"
-msgstr "Duración de la suscripción en meses"
+msgstr "Duración del bono en meses"
 
 msgid "Validity"
 msgstr "Validez"
@@ -3054,7 +3054,7 @@ msgid "If this variation is part of an order, the order will be put into an \"ap
 msgstr "Si esta variación es parte de una reserva, la reserva pasará a un estado de \"aprobación\" y deberá ser confirmada antes de poder pagarse y completarse. Puedes usar esto, por ejemplo, para plazas con descuento que solo están disponibles para grupos específicos."
 
 msgid "Membership types"
-msgstr "Tipos de membresía"
+msgstr "Tipos de bono"
 
 msgid "This variation will not be sold before the given date."
 msgstr "Esta variación no se reservará antes de la fecha indicada."
@@ -3371,19 +3371,19 @@ msgid "If you link to more than one ticket, make sure there is no overlap in val
 msgstr "Si vinculas más de una plaza, asegúrate de que no haya solapamiento en la validez. Si varias plazas son válidas al mismo tiempo, esto provocará fallos en el registro de llegada."
 
 msgid "Membership is transferable"
-msgstr "La suscripción es transferible"
+msgstr "El bono es transferible"
 
 msgid "If this is selected, the membership can be used to purchase tickets for multiple persons. If not, the attendee name always needs to stay the same."
-msgstr "Si se selecciona esta opción, la suscripción se puede utilizar para reservar plazas para varias personas. De lo contrario, el nombre del participante siempre debe permanecer igual."
+msgstr "Si se selecciona esta opción, el bono se puede utilizar para reservar plazas para varias personas. De lo contrario, el nombre del participante siempre debe permanecer igual."
 
 msgid "Parallel usage is allowed"
 msgstr "El uso paralelo está permitido"
 
 msgid "If this is selected, the membership can be used to purchase tickets for events happening at the same time. Note that this will only check for an identical start time of the events, not for any overlap between events. An overlap check will be performed if there is a product-level validity of the ticket."
-msgstr "Si se selecciona esta opción, la suscripción se puede utilizar para reservar plazas en sesiones que tengan lugar al mismo tiempo. Ten en cuenta que esto solo verificará una hora de inicio idéntica de las sesiones, no cualquier solapamiento entre ellas. Se realizará una comprobación de solapamiento si hay una validez a nivel de servicio de la plaza."
+msgstr "Si se selecciona esta opción, el bono se puede utilizar para reservar plazas en sesiones que tengan lugar al mismo tiempo. Ten en cuenta que esto solo verificará una hora de inicio idéntica de las sesiones, no cualquier solapamiento entre ellas. Se realizará una comprobación de solapamiento si hay una validez a nivel de servicio de la plaza."
 
 msgid "Number of times this membership can be used in a purchase."
-msgstr "Número de veces que esta suscripción se puede utilizar en una reserva."
+msgstr "Número de veces que este bono se puede utilizar en una reserva."
 
 msgid "pending"
 msgstr "pendiente"
@@ -5065,37 +5065,37 @@ msgid "Product does not support medium exchange."
 msgstr "Este servicio no admite el cambio de medio."
 
 msgid "You selected a membership for the product \"{product}\" which does not require a membership."
-msgstr "Has seleccionado una suscripción para el servicio \"{product}\" que no requiere suscripción."
+msgstr "Has seleccionado un bono para el servicio \"{product}\" que no requiere bono."
 
 msgid "You selected the product \"{product}\" which requires an active membership to be selected."
-msgstr "Has seleccionado el servicio \"{product}\" que requiere una suscripción activa."
+msgstr "Has seleccionado el servicio \"{product}\" que requiere un bono activo."
 
 msgid "You selected a membership that is connected to a different customer account."
-msgstr "Has seleccionado una suscripción vinculada a otra cuenta de cliente."
+msgstr "Has seleccionado un bono vinculado a otra cuenta de cliente."
 
 msgid "You selected membership that has been canceled."
-msgstr "Has seleccionado una suscripción que ha sido cancelada."
+msgstr "Has seleccionado un bono que ha sido cancelado."
 
 msgid "You can not use a test mode membership for tickets that are not in test mode."
-msgstr "No puedes usar una suscripción en modo de prueba para plazas que no estén en modo de prueba."
+msgstr "No puedes usar un bono en modo de prueba para plazas que no estén en modo de prueba."
 
 msgid "You need to add a test mode membership to the customer account to use it in test mode."
-msgstr "Es necesario añadir una suscripción en modo de prueba a la cuenta de cliente para usarla en modo de prueba."
+msgstr "Es necesario añadir un bono en modo de prueba a la cuenta de cliente para usarlo en modo de prueba."
 
 msgid "You selected a membership that is valid from {start} to {end}, but selected a ticket that starts to be valid on {date}."
-msgstr "Has seleccionado una suscripción válida de {start} a {end}, pero has seleccionado una plaza que empieza a ser válida el {date}."
+msgstr "Has seleccionado un bono válido de {start} a {end}, pero has seleccionado una plaza que empieza a ser válida el {date}."
 
 msgid "You selected a membership that is valid from {start} to {end}, but selected an event taking place at {date}."
-msgstr "Has seleccionado una suscripción válida de {start} a {end}, pero la sesión tiene lugar el {date}."
+msgstr "Has seleccionado un bono válido de {start} a {end}, pero la sesión tiene lugar el {date}."
 
 msgid "You selected a membership of type \"{type}\", which is not allowed for the product \"{product}\"."
-msgstr "Has seleccionado una suscripción de tipo \"{type}\", que no está permitida para el servicio \"{product}\"."
+msgstr "Has seleccionado un bono de tipo \"{type}\", que no está permitido para el servicio \"{product}\"."
 
 msgid "You are trying to use a membership of type \"{type}\" more than {number} times, which is the maximum amount."
-msgstr "Estás intentando usar una suscripción de tipo \"{type}\" más de {number} veces, que es la cantidad máxima."
+msgstr "Estás intentando usar un bono de tipo \"{type}\" más de {number} veces, que es la cantidad máxima."
 
 msgid "You are trying to use a membership of type \"{type}\" for a ticket valid from {valid_from} until {valid_until}, however you already used the same membership for a different ticket that overlaps with this time frame ({conflict_from} – {conflict_until})."
-msgstr "Estás intentando usar una suscripción de tipo \"{type}\" para una plaza válida desde {valid_from} hasta {valid_until}, pero ya has usado la misma suscripción para otra plaza que se solapa con este periodo ({conflict_from} – {conflict_until})."
+msgstr "Estás intentando usar un bono de tipo \"{type}\" para una plaza válida desde {valid_from} hasta {valid_until}, pero ya has usado el mismo bono para otra plaza que se solapa con este periodo ({conflict_from} – {conflict_until})."
 
 msgid "start"
 msgstr "Inicio"
@@ -5104,7 +5104,7 @@ msgid "open end"
 msgstr "Final abierto"
 
 msgid "You are trying to use a membership of type \"{type}\" for an event taking place at {date}, however you already used the same membership for a different ticket at the same time."
-msgstr "Estás intentando usar una suscripción de tipo \"{type}\" para una sesión que tendrá lugar el {date}, pero ya has usado la misma suscripción para otra plaza en el mismo momento."
+msgstr "Estás intentando usar un bono de tipo \"{type}\" para una sesión que tendrá lugar el {date}, pero ya has usado el mismo bono para otra plaza en el mismo momento."
 
 msgid "Error decoding special characters in your file: {message}"
 msgstr "Error al decodificar caracteres especiales en tu archivo: {message}"
@@ -5368,7 +5368,7 @@ msgid "Allow customers to create accounts"
 msgstr "Permitir a los clientes crear cuentas"
 
 msgid "This will allow customers to sign up for an account on your ticket shop. This is a prerequisite for some advanced features like memberships."
-msgstr "Esto permitirá a los clientes registrarse en la página de reservas. Es un requisito previo para algunas funciones avanzadas como las membresías."
+msgstr "Esto permitirá a los clientes registrarse en la página de reservas. Es un requisito previo para algunas funciones avanzadas como los bonos."
 
 msgid "Allow customers to log in with email address and password"
 msgstr "Permitir a los clientes iniciar sesión con correo electrónico y contraseña"
@@ -5772,7 +5772,7 @@ msgid "Invoices will never be automatically generated for free orders."
 msgstr "Las facturas nunca se generarán automáticamente para reservas gratuitas."
 
 msgid "Automatic based on ticket-specific validity, membership validity, event series date, or event date"
-msgstr "Automático, según la validez específica de la plaza, la validez de la membresía, la fecha de la serie de sesiones o la fecha de la sesión"
+msgstr "Automático, según la validez específica de la plaza, la validez del bono, la fecha de la serie de sesiones o la fecha de la sesión"
 
 msgid "Automatic, but prefer invoice date over event date"
 msgstr "Automático, pero se prefiere la fecha de la factura sobre la fecha de la sesión"
@@ -7873,13 +7873,13 @@ msgid "not yet activated"
 msgstr "aún no activado"
 
 msgid "Has no memberships"
-msgstr "Sin suscripciones"
+msgstr "Sin bonos"
 
 msgid "Has any membership"
-msgstr "Con suscripción"
+msgstr "Con bono"
 
 msgid "Has valid membership"
-msgstr "Con suscripción válida"
+msgstr "Con bono válido"
 
 msgid "Shop live"
 msgstr "Página activa"
@@ -8257,7 +8257,7 @@ msgid "Date chosen by customer"
 msgstr "Fecha elegida por el cliente"
 
 msgid "No membership granted"
-msgstr "No se concede suscripción"
+msgstr "No se concede bono"
 
 msgid "Gift card products should use a tax rule with a rate of 0 percent since sales tax will be applied when the gift card is redeemed."
 msgstr "Los servicios de tarjeta regalo deben usar una regla fiscal con una tasa del 0 %, ya que el impuesto se aplicará cuando se canjee la tarjeta regalo."
@@ -8266,10 +8266,10 @@ msgid "Do not set a specific validity for gift card products as it will not rest
 msgstr "No establezcas una validez específica para los servicios de tarjeta regalo, ya que no limitará la validez de la tarjeta. La validez de las tarjetas regalo se puede establecer en la configuración del negocio."
 
 msgid "If a valid membership is required, at least one valid membership type needs to be selected."
-msgstr "Si se requiere una suscripción válida, debe seleccionarse al menos un tipo de suscripción válido."
+msgstr "Si se requiere un bono válido, debe seleccionarse al menos un tipo de bono válido."
 
 msgid "Your product grants a non-transferable membership and should therefore be a personalized admission ticket. Otherwise customers might not be able to use the membership later. If you want the membership to be non-personalized, set the membership type to be transferable."
-msgstr "Tu servicio otorga una suscripción intransferible y por lo tanto debe ser una plaza personalizada. De lo contrario, los clientes podrían no poder usar la suscripción más adelante. Si quieres que la suscripción no sea personalizada, configura el tipo de suscripción como transferible."
+msgstr "Tu servicio otorga un bono intransferible y por lo tanto debe ser una plaza personalizada. De lo contrario, los clientes podrían no poder usar el bono más adelante. Si quieres que el bono no sea personalizado, configura el tipo de bono como transferible."
 
 msgid "The start of validity must be before the end of validity."
 msgstr "El inicio de la validez debe ser anterior al final de la validez."
@@ -8482,7 +8482,7 @@ msgid "Seat"
 msgstr "Asiento"
 
 msgid "Membership"
-msgstr "Suscripción"
+msgstr "Bono"
 
 msgid "Including taxes, if any. Keep empty for the product's default price"
 msgstr "Impuestos incluidos, si los hay. Deja vacío para usar el precio predeterminado del servicio"
@@ -8518,7 +8518,7 @@ msgid "Split into new order"
 msgstr "Dividir en nueva reserva"
 
 msgid "(No membership)"
-msgstr "(Sin suscripción)"
+msgstr "(Sin bono)"
 
 msgid "Remove this fee"
 msgstr "Eliminar esta tarifa"
@@ -8976,7 +8976,7 @@ msgid "Position #{posid}: {old_item} ({old_price}) changed to {new_item} ({new_p
 msgstr "Posición #{posid}: {old_item} ({old_price}) cambiado a {new_item} ({new_price})."
 
 msgid "Position #{posid}: Used membership changed."
-msgstr "Posición #{posid}: La membresía utilizada ha sido modificada."
+msgstr "Posición #{posid}: El bono utilizado ha sido modificado."
 
 msgid "Position #{posid}: Seat \"{old_seat}\" changed to \"{new_seat}\"."
 msgstr "Posición #{posid}: El asiento \"{old_seat}\" cambió a \"{new_seat}\"."
@@ -9471,13 +9471,13 @@ msgid "The SSO client has been deleted."
 msgstr "El cliente SSO ha sido eliminado."
 
 msgid "The membership type has been created."
-msgstr "El tipo de membresía ha sido creado."
+msgstr "El tipo de bono ha sido creado."
 
 msgid "The membership type has been changed."
-msgstr "El tipo de membresía ha sido modificado."
+msgstr "El tipo de bono ha sido modificado."
 
 msgid "The membership type has been deleted."
-msgstr "El tipo de membresía ha sido eliminado."
+msgstr "El tipo de bono ha sido eliminado."
 
 msgid "The sales channel has been created."
 msgstr "El canal de reservas ha sido creado."
@@ -9495,13 +9495,13 @@ msgid "The account has been changed."
 msgstr "La cuenta ha sido modificada."
 
 msgid "A membership for this account has been added."
-msgstr "Se ha añadido una membresía a esta cuenta."
+msgstr "Se ha añadido un bono a esta cuenta."
 
 msgid "A membership of this account has been changed."
-msgstr "Se ha modificado una membresía de esta cuenta."
+msgstr "Se ha modificado un bono de esta cuenta."
 
 msgid "A membership of this account has been deleted."
-msgstr "Se ha eliminado una membresía de esta cuenta."
+msgstr "Se ha eliminado un bono de esta cuenta."
 
 msgid "The account has been disabled and anonymized."
 msgstr "La cuenta ha sido desactivada y anonimizada."
@@ -10689,7 +10689,7 @@ msgid "If an add-on product is newly added, the system currently does not valida
 msgstr "Si se añade un servicio complementario nuevo, el sistema actualmente no valida si hay preguntas o campos obligatorios que deben completarse."
 
 msgid "Customers currently cannot switch to a product variation or add an add-on product that requires them to use a voucher or membership."
-msgstr "Actualmente, los clientes no pueden cambiar a una variación del servicio ni añadir un servicio complementario que requiera usar un código o membresía."
+msgstr "Actualmente, los clientes no pueden cambiar a una variación del servicio ni añadir un servicio complementario que requiera usar un código o bono."
 
 msgid "Additional constraints and validation steps added by plugins are not enforced."
 msgstr "No se aplican restricciones adicionales ni pasos de validación añadidos por los plugins."
@@ -11780,7 +11780,7 @@ msgid "Additional settings"
 msgstr "Ajustes adicionales"
 
 msgid "Membership duration after purchase"
-msgstr "Duración de la membresía después de la reserva"
+msgstr "Duración del bono después de la reserva"
 
 msgid "Product history"
 msgstr "Historial del servicio"
@@ -11857,7 +11857,7 @@ msgid "With automatic discounts, you can automatically apply a discount to purch
 msgstr "Con los descuentos automáticos, puedes aplicar automáticamente un descuento a las reservas de tus clientes según ciertas condiciones. Por ejemplo, puedes crear descuentos de grupo como «obtén un 20%% de descuento si reservas 3 o más plazas» o «reserva 2 plazas y obtén 1 gratis»."
 
 msgid "Automatic discounts are available to all customers as long as they are active. If you want to offer special prices only to specific customers, you can use vouchers instead. If you want to offer discounts across multiple purchases (\"buy a package of 10 you can turn into individual tickets later\"), you can use customer accounts and memberships instead."
-msgstr "Los descuentos automáticos están disponibles para todos los clientes mientras estén activos. Si quieres ofrecer precios especiales solo a clientes específicos, puedes usar códigos. Si quieres ofrecer descuentos en varias reservas («compra un paquete de 10 que puedes convertir en plazas individuales después»), puedes usar cuentas de cliente y membresías."
+msgstr "Los descuentos automáticos están disponibles para todos los clientes mientras estén activos. Si quieres ofrecer precios especiales solo a clientes específicos, puedes usar códigos. Si quieres ofrecer descuentos en varias reservas («compra un paquete de 10 que puedes convertir en plazas individuales después»), puedes usar cuentas de cliente y bonos."
 
 msgid "Discounts are only automatically applied during an initial purchase. They are not applied if an existing order is changed through any of the available options."
 msgstr "Los descuentos solo se aplican automáticamente durante una reserva inicial. No se aplican si se modifica una reserva existente mediante cualquiera de las opciones disponibles."
@@ -12256,7 +12256,7 @@ msgid "If you change this, it might cause a new ticket QR code to be generated a
 msgstr "Si cambias esto, es posible que se genere un nuevo código QR y que se invalide el anterior."
 
 msgid "The sale of this position created a membership. Changing the product here will not affect the membership. Memberships can be managed in the customer account."
-msgstr "La venta de esta plaza creó una suscripción. Cambiar el servicio aquí no afectará a la suscripción. Las suscripciones se pueden gestionar en la cuenta de cliente."
+msgstr "La reserva de esta plaza creó un bono. Cambiar el servicio aquí no afectará al bono. Los bonos se pueden gestionar en la cuenta de cliente."
 
 msgid "Ticket block"
 msgstr "Bloqueo de plaza"
@@ -12283,7 +12283,7 @@ msgid "–"
 msgstr "–"
 
 msgid "The sale of this position created a membership. Changing the validity of the ticket here will not affect the membership. Memberships can be managed in the customer account."
-msgstr "La venta de esta plaza creó una suscripción. Cambiar la validez aquí no afectará a la suscripción. Las suscripciones se pueden gestionar en la cuenta de cliente."
+msgstr "La reserva de esta plaza creó un bono. Cambiar la validez aquí no afectará al bono. Los bonos se pueden gestionar en la cuenta de cliente."
 
 msgid "Ticket secrets of order positions that have been used to issue a gift card can not be changed. Only the link will be changed in this case."
 msgstr "Los datos de las posiciones que se han utilizado para emitir una tarjeta regalo no se pueden modificar. En este caso, solo se modificará el enlace."
@@ -13127,7 +13127,7 @@ msgid "Usages"
 msgstr "Usos"
 
 msgid "Add membership"
-msgstr "Añadir membresía"
+msgstr "Añadir bono"
 
 msgid "Matched to the account based on the email address."
 msgstr "Coincidencia con la cuenta basada en la dirección de correo electrónico."
@@ -13151,7 +13151,7 @@ msgid "The orders themselves will not be anonymized and can still contain person
 msgstr "¡Las reservas en sí no serán anónimas y aún pueden contener información personal!"
 
 msgid "The customer will no longer be able to log in and will lose access to any membership benefits."
-msgstr "El cliente ya no podrá iniciar sesión y perderá el acceso a los beneficios de la suscripción."
+msgstr "El cliente ya no podrá iniciar sesión y perderá el acceso a los beneficios del bono."
 
 msgid "This action is irreversible."
 msgstr "Esta operación es irreversible."
@@ -13160,10 +13160,10 @@ msgid "New customer"
 msgstr "Nuevo cliente"
 
 msgid "Are you sure you want to delete this membership?"
-msgstr "¿Estás seguro de que quieres eliminar esta suscripción?"
+msgstr "¿Estás seguro de que quieres eliminar este bono?"
 
 msgid "This membership cannot be deleted since it has been used in an order. Change its end date to the past instead."
-msgstr "Esta suscripción no se puede eliminar ya que se ha utilizado en una reserva. En su lugar, cambia su fecha de finalización al pasado."
+msgstr "Este bono no se puede eliminar ya que se ha utilizado en una reserva. En su lugar, cambia su fecha de finalización al pasado."
 
 msgid "No customer accounts have been created yet."
 msgstr "Todavía no se han creado cuentas de cliente."
@@ -13463,22 +13463,22 @@ msgid "Customer account security notification"
 msgstr "Notificación de seguridad de cuenta de cliente"
 
 msgid "Delete membership type:"
-msgstr "Eliminar tipo de suscripción:"
+msgstr "Eliminar tipo de bono:"
 
 msgid "Are you sure you want to delete this membership type?"
-msgstr "¿Seguro que quieres eliminar este tipo de suscripción?"
+msgstr "¿Seguro que quieres eliminar este tipo de bono?"
 
 msgid "This membership type cannot be deleted since it has already been used."
-msgstr "Este tipo de suscripción no se puede eliminar porque ya se ha utilizado."
+msgstr "Este tipo de bono no se puede eliminar porque ya se ha utilizado."
 
 msgid "Membership type:"
-msgstr "Tipo de suscripción:"
+msgstr "Tipo de bono:"
 
 msgid "Create a new membership type"
-msgstr "Crear un nuevo tipo de suscripción"
+msgstr "Crear un nuevo tipo de bono"
 
 msgid "You can define membership types. These allow you to link products from different events together. You can sell a membership as part of a a product in one event, and require valid memberships to allow purchases in another event."
-msgstr "Puedes definir tipos de suscripción. Estos permiten vincular servicios de diferentes sesiones. Puedes vender una suscripción como parte de un servicio en una sesión y exigir suscripciones válidas para permitir reservas en otra sesión."
+msgstr "Puedes definir tipos de bono. Estos permiten vincular servicios de diferentes sesiones. Puedes vender un bono como parte de un servicio en una sesión y exigir bonos válidos para permitir reservas en otra sesión."
 
 msgid "This can be used to enable products like year passes, tickets of ten, etc."
 msgstr "Esto se puede utilizar para habilitar servicios como abonos anuales, bonos de diez, etc."
@@ -18069,10 +18069,10 @@ msgstr "Ha fallado el proceso de autenticación, inténtalo de nuevo."
 
 msgctxt "checkoutflow"
 msgid "Membership"
-msgstr "Suscripción"
+msgstr "Bono"
 
 msgid "Your cart includes a product that requires an active membership to be selected."
-msgstr "Tu selección incluye un servicio que requiere una suscripción activa."
+msgstr "Tu selección incluye un servicio que requiere un bono activo."
 
 msgctxt "checkoutflow"
 msgid "Add-on products"
@@ -18420,13 +18420,13 @@ msgid "You are not required to create an account. If you proceed as a guest, you
 msgstr "No es necesario que crees una cuenta. Si continúas sin cuenta, podrás acceder a los detalles y el estado de tu reserva en cualquier momento a través del enlace privado que te enviaremos por correo electrónico una vez se complete la reserva."
 
 msgid "Some of the products in your cart can only be purchased if there is an active membership on your account."
-msgstr "Algunos de los servicios en tu selección solo pueden reservarse si tienes una membresía activa en tu cuenta."
+msgstr "Algunos de los servicios en tu selección solo pueden reservarse si tienes un bono activo en tu cuenta."
 
 msgid "Selected add-ons"
 msgstr "Complementos seleccionados"
 
 msgid "This product can only be purchased when you are logged in with a customer account that includes a valid membership or authorization for this type of product."
-msgstr "Este servicio solo puede reservarse cuando inicias sesión con una cuenta que incluye una membresía o autorización válida para este tipo de servicio."
+msgstr "Este servicio solo puede reservarse cuando inicias sesión con una cuenta que incluye un bono válido para este tipo de servicio."
 
 msgid "You already selected the following payment methods:"
 msgstr "Ya seleccionaste los siguientes métodos de pago:"
@@ -18618,7 +18618,7 @@ msgid "Show full location"
 msgstr "Mostrar ubicación completa"
 
 msgid "Membership:"
-msgstr "Membresía:"
+msgstr "Bono:"
 
 msgid "This ticket is blocked."
 msgstr "Esta plaza está bloqueada."
@@ -19533,7 +19533,7 @@ msgid "If the problem continues, closing all browser windows and clearing cookie
 msgstr "Si el problema continúa, cerrar todas las ventanas del navegador y borrar las cookies antes de volver a intentarlo puede ayudar. Como último recurso, prueba a usar otro navegador u otro dispositivo (por ejemplo, un ordenador de sobremesa o portátil)."
 
 msgid "Your membership"
-msgstr "Tu afiliación"
+msgstr "Tu bono"
 
 msgid "transferable"
 msgstr "transferible"
@@ -19542,13 +19542,13 @@ msgid "not transferable"
 msgstr "intransferible"
 
 msgid "You haven’t used this membership yet."
-msgstr "Aún no has usado esta afiliación."
+msgstr "Aún no has usado este bono."
 
 msgid "Expired since"
 msgstr "Caducada desde"
 
 msgid "You don’t have any memberships in your account yet."
-msgstr "Aún no tienes ninguna afiliación en tu cuenta."
+msgstr "Aún no tienes ningún bono en tu cuenta."
 
 msgid "%(counter)s item"
 msgid_plural "%(counter)s items"

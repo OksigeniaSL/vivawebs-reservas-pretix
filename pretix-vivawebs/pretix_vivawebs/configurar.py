@@ -4,6 +4,13 @@ Datos (JSON):
     slug, tipo ("clases" | "salas"), negocio, email, clave, zona, color, web, privacidad, aviso_legal,
     logo (data URI png/jpg/webp), demo (bool), fuente (URL del código fuente publicado),
     clases:  servicios: [{nombre, precio, descripcion, plazas, duracion (min), dias [0=lunes…], hora "HH:MM"}]
+             bonos (opcional): [{nombre, precio, usos, meses, descripcion, servicios: [comienzos de nombre]}]
+             Cada bono se vende en su propia agenda «bonos» (sin fechas) y da una membresía de pretix con
+             `usos` usos y `meses` de validez; en cada sesión de los servicios que cubre (los que empiezan
+             por alguno de `servicios`) se añade «<servicio> con bono», a 0 €, que exige esa membresía.
+             El cliente necesita cuenta (se activan las cuentas de cliente del negocio).
+             cuenta_prueba (solo demos): {email, clave}: cuenta de cliente con un bono de cada tipo, para
+             probar la reserva con bono sin comprarlo (en las demos no sale ningún correo).
     salas:   horario: {dias, desde "HH:MM", hasta "HH:MM", minutos}
              recursos: [{nombre, cantidad}]
              servicios: [{nombre, precio, descripcion, usa: [nombres de recursos]}]
@@ -61,7 +68,8 @@ def crear_sesiones(ev, plan, semanas=8, desde=None):
 
     tz = ZoneInfo(ev.settings.timezone)
     hoy = desde or datetime.now(tz).date()
-    existentes = set(ev.subevents.values_list("date_from", "name"))
+    # The name is an I18n string (not hashable): compare its text.
+    existentes = {(d, str(n)) for d, n in ev.subevents.values_list("date_from", "name")}
     items = {str(i.name): i for i in Item.objects.filter(event=ev)}
     nuevas = 0
 
@@ -81,7 +89,7 @@ def crear_sesiones(ev, plan, semanas=8, desde=None):
                 if d.weekday() in s.get("dias", []):
                     ini = datetime.combine(d, _hora(s["hora"]), tz)
                     nueva(ini, ini + timedelta(minutes=int(s.get("duracion", 60))), s["nombre"],
-                          [(s["nombre"], int(s["plazas"]), [s["nombre"]])])
+                          [(s["nombre"], int(s["plazas"]), [s["nombre"]] + plan.get("con_bono", {}).get(s["nombre"], []))])
         else:
             h = plan.get("horario")
             if not h or d.weekday() not in h.get("dias", []):
@@ -104,6 +112,126 @@ def _logo(ev, data_uri):
     ext = "jpg" if m.group(1).startswith("jp") else m.group(1)
     nombre = default_storage.save(f"pub/{ev.organizer.slug}/{ev.slug}/logo.{ext}", ContentFile(base64.b64decode(m.group(2))))
     ev.settings.set("logo_image", "file://" + nombre)
+
+
+PORTADA_BONOS = ("Compra aquí tu bono. Lo pagas en {negocio} y, desde ese momento, reservas tus clases con tu "
+                 "cuenta: cada clase descuenta un uso.")
+
+
+def _cuenta_prueba(o, tipos, cp) -> None:
+    """Demos: a customer with one test-mode pass of each type, so visitors can book with a pass."""
+    from pretix.base.models import Customer, Membership
+
+    nombre = {"_scheme": "full", "full_name": "Cliente de prueba"}
+    c = Customer.objects.filter(organizer=o, email=cp["email"]).first() or Customer(organizer=o, email=cp["email"])
+    c.name_parts = nombre
+    c.is_active = True
+    c.is_verified = True
+    c.locale = "es"
+    c.set_password(cp["clave"])
+    c.save()
+    for mt in tipos:
+        m = Membership.objects.filter(customer=c, membership_type=mt, testmode=True).first() or \
+            Membership(customer=c, membership_type=mt, testmode=True)
+        m.canceled = False
+        m.date_start = now() - timedelta(days=1)
+        m.date_end = now() + timedelta(days=365 * 5)
+        m.attendee_name_parts = nombre
+        m.save()
+    o.settings.vw_cuenta_prueba = cp["email"]
+    o.settings.vw_cuenta_prueba_datos = {"email": cp["email"], "clave": cp["clave"]}
+
+
+def _bonos(o, ev, d) -> dict:
+    """Bonos de clases con las membresías de pretix. Devuelve {servicio: [artículos «con bono»]}."""
+    from pretix.base.models import Event, Item, MembershipType, Quota
+
+    o.settings.customer_accounts = True
+    o.settings.customer_accounts_native = True
+    eb = Event.objects.filter(organizer=o, slug="bonos").first()
+    if not eb:
+        eb = Event.objects.create(organizer=o, slug="bonos", name=ES(f"Bonos de {d['negocio']}"), currency="EUR",
+                                  date_from=now(), has_subevents=False, live=False)
+        eb.set_defaults()
+    eb.name = ES(f"Bonos de {d['negocio']}")
+    eb.testmode = ev.testmode
+    for p in ("pretix.plugins.ticketoutputpdf", "pretix.plugins.ticketoutputpassbook"):
+        if p in (eb.plugins or ""):
+            eb.disable_plugin(p)
+    eb.enable_plugin("pretix.plugins.manualpayment")
+    eb.enable_plugin("pretix_vivawebs")
+    # Same settings as the classes (language, texts, payment at the studio, colour, logo, contact).
+    for clave in ("locale", "locales", "region", "timezone", "order_phone_asked", "order_phone_required",
+                  "invoice_address_asked", "invoice_name_required", "ticket_download",
+                  "payment_term_expire_automatically", "payment_pending_hidden", "mail_days_order_expire_warning",
+                  "mail_subject_order_placed", "mail_text_order_placed", "mail_subject_order_free",
+                  "mail_text_order_free", "cancel_allow_user", "mail_from_name", "contact_mail", "primary_color",
+                  "privacy_url", "imprint_url", "payment_manual__enabled", "payment_manual_public_name",
+                  "payment_manual_checkout_description", "payment_manual_email_instructions",
+                  "payment_manual_pending_description", "meta_noindex", "logo_image", "vw_recordatorio_horas"):
+        if ev.settings.get(clave) is not None:
+            eb.settings.set(clave, ev.settings.get(clave))
+    eb.settings.frontpage_text = ES(PORTADA_BONOS.format(negocio=d["negocio"]))
+    # A shop without dates: no date on the page, no calendar file, and the sale never closes.
+    eb.settings.show_dates_on_frontpage = False
+    eb.settings.show_date_to = False
+    eb.settings.show_times = False
+    eb.presale_end = now() + timedelta(days=365 * 20)
+    cupo, _ = Quota.objects.get_or_create(event=eb, name="Bonos", defaults={"size": None})
+    cupo.size = None
+    cupo.save()
+
+    con_bono = {}
+    tipos = []
+    servicios = [sv["nombre"] for sv in d.get("servicios", [])]
+    for b in d["bonos"]:
+        # Names are stored as JSON (with escaped characters): compare the text in Python, not in SQL.
+        mt = next((m for m in MembershipType.objects.filter(organizer=o) if str(m.name) == b["nombre"]), None)
+        if not mt:
+            mt = MembershipType(organizer=o, name=ES(b["nombre"]))
+        mt.name = ES(b["nombre"])
+        mt.max_usages = int(b["usos"])
+        mt.transferable = False
+        mt.allow_parallel_usage = False
+        mt.save()
+        tipos.append(mt)
+        it, _ = Item.objects.get_or_create(event=eb, name=ES(b["nombre"]), defaults={"default_price": b["precio"]})
+        it.default_price = b["precio"]
+        it.admission = False
+        it.grant_membership_type = mt
+        it.grant_membership_duration_like_event = False
+        it.grant_membership_duration_months = int(b.get("meses", 4))
+        it.grant_membership_duration_days = 0
+        if b.get("descripcion"):
+            it.description = ES(b["descripcion"])
+        it.save()
+        cupo.items.add(it)
+        for nombre in servicios:
+            if not any(nombre.startswith(pref) for pref in b.get("servicios", [])):
+                continue
+            nb = f"{nombre} con bono"
+            ib, _ = Item.objects.get_or_create(event=ev, name=ES(nb), defaults={"default_price": 0, "admission": True})
+            ib.default_price = 0
+            ib.admission = True
+            ib.require_membership = True
+            ib.description = ES(f"Con tu {b['nombre'][:1].lower()}{b['nombre'][1:]}: descuenta un uso.")
+            base = next((i for i in Item.objects.filter(event=ev) if str(i.name) == nombre), None)
+            ib.position = (base.position if base else 0) + 1   # right after the class itself
+            ib.save()
+            ib.require_membership_types.set([mt])
+            con_bono.setdefault(nombre, [])
+            if nb not in con_bono[nombre]:
+                con_bono[nombre].append(nb)
+    # Sessions already created: their quota also takes the pass item.
+    for nombre, nbs in con_bono.items():
+        items = [i for i in Item.objects.filter(event=ev) if str(i.name) in nbs]
+        for q in Quota.objects.filter(event=ev, name=nombre, subevent__date_from__gte=now()):
+            q.items.add(*items)
+    if d.get("demo") and d.get("cuenta_prueba"):
+        _cuenta_prueba(o, tipos, d["cuenta_prueba"])
+    eb.live = True
+    eb.save()
+    return con_bono
 
 
 def configurar(d: dict) -> dict:
@@ -136,7 +264,7 @@ def configurar(d: dict) -> dict:
         o.settings.locale = "es"
         o.settings.timezone = zona
 
-        ev = Event.objects.filter(organizer=o).first()
+        ev = Event.objects.filter(organizer=o, slug=SLUG_EVENTO[tipo]).first()
         if not ev:
             ev = Event.objects.create(organizer=o, slug=SLUG_EVENTO[tipo], name=ES(d["negocio"]), currency="EUR",
                                       date_from=now(), has_subevents=True, live=False)
@@ -175,7 +303,10 @@ def configurar(d: dict) -> dict:
         for clave, valor in (("privacy_url", d.get("privacidad")), ("imprint_url", d.get("aviso_legal"))):
             if valor:
                 s.set(clave, ES(valor))
-        s.frontpage_text = ES(PORTADA[tipo])
+        portada = PORTADA[tipo]
+        if tipo == "clases" and d.get("bonos"):
+            portada += " ¿Tienes bono? Elige la opción «con bono» de tu clase y entra con tu cuenta."
+        s.frontpage_text = ES(portada)
         s.payment_manual__enabled = True
         s.payment_manual_public_name = ES("Pago en el local")
         texto_pago = f"Pagas en {d['negocio']} el día de tu reserva."
@@ -188,15 +319,18 @@ def configurar(d: dict) -> dict:
         _logo(ev, d.get("logo"))
 
         # Servicios: precio y descripción del negocio (vienen en los datos o los pone él en su panel).
-        for sv in d.get("servicios", []):
+        for n, sv in enumerate(d.get("servicios", [])):
             it, _ = Item.objects.get_or_create(event=ev, name=ES(sv["nombre"]),
                                                defaults={"default_price": sv.get("precio") or 0, "admission": True})
             it.default_price = sv.get("precio") or 0
+            it.position = n * 10
             if sv.get("descripcion"):
                 it.description = ES(sv["descripcion"])
             it.save()
+        con_bono = _bonos(o, ev, d) if tipo == "clases" and d.get("bonos") else {}
         plan = {"tipo": tipo, "servicios": d.get("servicios", []), "horario": d.get("horario"),
-                "recursos": d.get("recursos", []), "renovar": bool(d.get("demo")), "semanas": 6}
+                "recursos": d.get("recursos", []), "renovar": bool(d.get("demo")), "semanas": 6,
+                "con_bono": con_bono}
         if d.get("demo"):
             s.vw_plan = plan
         sesiones = crear_sesiones(ev, plan) if d.get("servicios") else 0

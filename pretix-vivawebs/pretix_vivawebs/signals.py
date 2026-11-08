@@ -15,7 +15,7 @@ from django.utils.timezone import now
 from django_scopes import scopes_disabled
 from pretix.base.middleware import add_to_response_csp
 from pretix.base.signals import periodic_task
-from pretix.presale.signals import contact_form_fields, html_head, process_response
+from pretix.presale.signals import contact_form_fields, html_head, html_page_header, process_response
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +50,17 @@ def cabecera(sender, request=None, **kwargs):
         partes.append(format_html('<script src="{}/turnstile/v0/api.js?render=explicit" async defer></script>', CLOUDFLARE))
         partes.append(format_html('<script src="{}" defer></script>', static("pretix_vivawebs/captcha.js")))
     return "".join(partes)
+
+
+@receiver(html_page_header, dispatch_uid="vivawebs_cuenta_prueba")
+def cuenta_prueba(sender, request=None, **kwargs):
+    """Demos with passes: the test account on every page, also on the checkout step that asks to log in."""
+    cuenta = sender.organizer.settings.get("vw_cuenta_prueba_datos", as_type=dict)
+    if not sender.testmode or not cuenta:
+        return ""
+    return format_html('<p class="vw-prueba">Para reservar con bono sin comprarlo, entra con la cuenta de prueba: '
+                       'correo <strong>{}</strong>, contraseña <strong>{}</strong>. Tiene un bono de cada tipo.</p>',
+                       cuenta.get("email", ""), cuenta.get("clave", ""))
 
 
 @receiver(process_response, dispatch_uid="vivawebs_csp")

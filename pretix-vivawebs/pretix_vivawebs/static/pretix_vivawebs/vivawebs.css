@@ -6,3 +6,6 @@ h1, h2, h3, h4, .page-header h1 { font-family: var(--vw-display, inherit); lette
 
 /* Se paga en el local (pago manual, la única forma de pago): no hay pago que «reintentar». */
 a.btn[href*="/pay/change"] { display: none; }
+
+/* Demos con bonos: la cuenta de prueba, en una franja discreta arriba de cada página. */
+.vw-prueba { margin: 0; padding: .6em 1em; text-align: center; background: #fcf8e3; color: #6b4f00; border-bottom: 1px solid #f0d78c; }

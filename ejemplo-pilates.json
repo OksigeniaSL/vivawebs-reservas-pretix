@@ -1,0 +1,349 @@
+{
+ "servicios": [
+  {
+   "nombre": "Reformer · Inicial",
+   "precio": 20,
+   "plazas": 2,
+   "duracion": 50,
+   "dias": [
+    0
+   ],
+   "hora": "07:30",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Pilates suelo · Todos los niveles",
+   "precio": 14,
+   "plazas": 7,
+   "duracion": 55,
+   "dias": [
+    0
+   ],
+   "hora": "09:30",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Reformer · Intermedio",
+   "precio": 20,
+   "plazas": 3,
+   "duracion": 50,
+   "dias": [
+    0
+   ],
+   "hora": "18:00",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Yoga · Inicial",
+   "precio": 14,
+   "plazas": 9,
+   "duracion": 60,
+   "dias": [
+    0
+   ],
+   "hora": "19:15",
+   "descripcion": "Yoga en grupo reducido; las esterillas las ponemos nosotros."
+  },
+  {
+   "nombre": "Pilates suelo · Avanzado",
+   "precio": 14,
+   "plazas": 4,
+   "duracion": 55,
+   "dias": [
+    0
+   ],
+   "hora": "20:30",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Espalda sana · Inicial",
+   "precio": 14,
+   "plazas": 5,
+   "duracion": 50,
+   "dias": [
+    1
+   ],
+   "hora": "09:00",
+   "descripcion": "Para la espalda cargada: movilidad, respiración y fuerza suave."
+  },
+  {
+   "nombre": "Reformer · Inicial",
+   "precio": 20,
+   "plazas": 1,
+   "duracion": 50,
+   "dias": [
+    1
+   ],
+   "hora": "10:30",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Pilates suelo · Intermedio",
+   "precio": 14,
+   "plazas": 0,
+   "duracion": 55,
+   "dias": [
+    1
+   ],
+   "hora": "18:30",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Reformer · Avanzado",
+   "precio": 20,
+   "plazas": 2,
+   "duracion": 50,
+   "dias": [
+    1
+   ],
+   "hora": "19:45",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Reformer · Intermedio",
+   "precio": 20,
+   "plazas": 4,
+   "duracion": 50,
+   "dias": [
+    2
+   ],
+   "hora": "07:30",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Yoga · Todos los niveles",
+   "precio": 14,
+   "plazas": 10,
+   "duracion": 60,
+   "dias": [
+    2
+   ],
+   "hora": "09:30",
+   "descripcion": "Yoga en grupo reducido; las esterillas las ponemos nosotros."
+  },
+  {
+   "nombre": "Pilates suelo · Inicial",
+   "precio": 14,
+   "plazas": 6,
+   "duracion": 55,
+   "dias": [
+    2
+   ],
+   "hora": "13:00",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Espalda sana · Inicial",
+   "precio": 14,
+   "plazas": 3,
+   "duracion": 50,
+   "dias": [
+    2
+   ],
+   "hora": "18:00",
+   "descripcion": "Para la espalda cargada: movilidad, respiración y fuerza suave."
+  },
+  {
+   "nombre": "Reformer · Inicial",
+   "precio": 20,
+   "plazas": 0,
+   "duracion": 50,
+   "dias": [
+    2
+   ],
+   "hora": "19:15",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Yoga · Intermedio",
+   "precio": 14,
+   "plazas": 8,
+   "duracion": 60,
+   "dias": [
+    2
+   ],
+   "hora": "20:30",
+   "descripcion": "Yoga en grupo reducido; las esterillas las ponemos nosotros."
+  },
+  {
+   "nombre": "Espalda sana · Inicial",
+   "precio": 14,
+   "plazas": 6,
+   "duracion": 50,
+   "dias": [
+    3
+   ],
+   "hora": "09:00",
+   "descripcion": "Para la espalda cargada: movilidad, respiración y fuerza suave."
+  },
+  {
+   "nombre": "Reformer · Intermedio",
+   "precio": 20,
+   "plazas": 2,
+   "duracion": 50,
+   "dias": [
+    3
+   ],
+   "hora": "10:30",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Pilates suelo · Inicial",
+   "precio": 14,
+   "plazas": 5,
+   "duracion": 55,
+   "dias": [
+    3
+   ],
+   "hora": "18:30",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Reformer · Intermedio",
+   "precio": 20,
+   "plazas": 3,
+   "duracion": 50,
+   "dias": [
+    3
+   ],
+   "hora": "19:45",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Reformer · Avanzado",
+   "precio": 20,
+   "plazas": 1,
+   "duracion": 50,
+   "dias": [
+    4
+   ],
+   "hora": "07:30",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Pilates suelo · Todos los niveles",
+   "precio": 14,
+   "plazas": 8,
+   "duracion": 55,
+   "dias": [
+    4
+   ],
+   "hora": "09:30",
+   "descripcion": "Pilates en esterilla, con aros, pelotas y bandas."
+  },
+  {
+   "nombre": "Yoga · Inicial",
+   "precio": 14,
+   "plazas": 11,
+   "duracion": 60,
+   "dias": [
+    4
+   ],
+   "hora": "18:00",
+   "descripcion": "Yoga en grupo reducido; las esterillas las ponemos nosotros."
+  },
+  {
+   "nombre": "Reformer · Inicial",
+   "precio": 20,
+   "plazas": 4,
+   "duracion": 50,
+   "dias": [
+    4
+   ],
+   "hora": "19:15",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Reformer · Todos los niveles",
+   "precio": 20,
+   "plazas": 2,
+   "duracion": 50,
+   "dias": [
+    5
+   ],
+   "hora": "10:00",
+   "descripcion": "En máquina, grupos de seis como mucho."
+  },
+  {
+   "nombre": "Yoga · Todos los niveles",
+   "precio": 14,
+   "plazas": 6,
+   "duracion": 60,
+   "dias": [
+    5
+   ],
+   "hora": "11:15",
+   "descripcion": "Yoga en grupo reducido; las esterillas las ponemos nosotros."
+  },
+  {
+   "nombre": "Clase de prueba · Reformer",
+   "precio": 10,
+   "plazas": 1,
+   "duracion": 50,
+   "dias": [
+    1
+   ],
+   "hora": "07:30",
+   "descripcion": "Tu primera clase en el estudio, en el nivel que te toque."
+  },
+  {
+   "nombre": "Clase de prueba · Suelo",
+   "precio": 10,
+   "plazas": 1,
+   "duracion": 50,
+   "dias": [
+    0
+   ],
+   "hora": "09:30",
+   "descripcion": "Tu primera clase en el estudio, en el nivel que te toque."
+  },
+  {
+   "nombre": "Clase de prueba · Yoga",
+   "precio": 10,
+   "plazas": 1,
+   "duracion": 50,
+   "dias": [
+    4
+   ],
+   "hora": "18:00",
+   "descripcion": "Tu primera clase en el estudio, en el nivel que te toque."
+  }
+ ],
+ "bonos": [
+  {
+   "nombre": "Bono de 10 clases · Reformer",
+   "precio": 180,
+   "usos": 10,
+   "meses": 4,
+   "servicios": [
+    "Reformer"
+   ],
+   "descripcion": "Diez clases de reformer, en cualquier nivel y a cualquier hora. Cuatro meses para hacerlas."
+  },
+  {
+   "nombre": "Bono de 10 clases · Suelo y espalda sana",
+   "precio": 120,
+   "usos": 10,
+   "meses": 4,
+   "servicios": [
+    "Pilates suelo",
+    "Espalda sana"
+   ],
+   "descripcion": "Diez clases de pilates suelo o de espalda sana. Cuatro meses para hacerlas."
+  },
+  {
+   "nombre": "Bono de 10 clases · Yoga",
+   "precio": 110,
+   "usos": 10,
+   "meses": 4,
+   "servicios": [
+    "Yoga"
+   ],
+   "descripcion": "Diez clases de yoga, en cualquier nivel. Cuatro meses para hacerlas."
+  }
+ ],
+ "cuenta_prueba": {
+  "email": "prueba@ejemplo-pilates.vivawebs.com",
+  "clave": "vertebra2026"
+ }
+}
