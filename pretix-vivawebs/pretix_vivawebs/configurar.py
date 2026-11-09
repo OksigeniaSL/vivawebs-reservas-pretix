@@ -424,6 +424,7 @@ def configurar(d: dict) -> dict:
         # Classes repeat every week: the week reads better than the whole month (the month stays as an option).
         if d.get("vista") or tipo == "clases":
             s.event_list_type = d.get("vista") or "week"
+        s.name_scheme = "full"   # one field, «Nombre y apellidos»: fewer boxes to fill in to book
         s.order_phone_asked = True
         s.order_phone_required = True
         s.invoice_address_asked = False

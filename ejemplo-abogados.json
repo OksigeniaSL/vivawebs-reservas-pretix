@@ -105,7 +105,7 @@
     "Sí, los llevaré a la consulta",
     "Todavía no"
    ],
-   "obligatoria": true,
+   "obligatoria": false,
    "clave": "documentos"
   },
   {
@@ -117,5 +117,6 @@
  ],
  "ocupadas": 0.35,
  "vista": "week",
- "portada": "Elige tu asunto, el día y la hora de tu primera consulta: 45 minutos, en el despacho (calle del Prado, 14, 2.º) o por videollamada. Se paga en el despacho y, si nos encargas el asunto, se descuenta."
+ "portada": "Elige tu asunto, el día y la hora de tu primera consulta: 45 minutos, en el despacho (calle del Prado, 14, 2.º) o por videollamada. Puedes pagarla con tarjeta al reservar o en el despacho y, si nos encargas el asunto, se descuenta. En esta demo, la tarjeta de prueba 4242 4242 4242 4242, con cualquier fecha futura y cualquier CVC: no se cobra nada.",
+ "_tarjeta": "Pago con tarjeta de la demo: pretix.plugins.stripe con las claves de prueba de VivaWebs (~/.config/vivawebs/stripe_test*), puestas a mano en los ajustes del evento (payment_stripe_*). Ver hq recetas.md."
 }
