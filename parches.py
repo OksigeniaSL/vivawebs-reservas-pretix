@@ -11,6 +11,14 @@ CAMBIOS = [
     ("/pretix/src/pretix/api/middleware.py",
      "        if not request.path.startswith('/api/'):\n", "        if not request.path_info.startswith('/api/'):\n", 2),
 ]
+# The week selector, in Spanish words: «Semana del 9 al 15 de noviembre» (the installations are in Spanish only).
+CAMBIOS.append((
+    "/pretix/src/pretix/presale/templates/pretixpresale/event/fragment_subevent_calendar_week.html",
+    "                                        {{ w.0|date:subevent_list.week_format }}\n"
+    "                                    ({{ w.0|date:subevent_list.short_month_day_format }} – {{ w.1|date:subevent_list.short_month_day_format }})\n",
+    "                                        Semana del {{ w.0|date:\"j\" }}{% if w.0.month != w.1.month %} de {{ w.0|date:\"F\" }}{% endif %}"
+    " al {{ w.1|date:\"j \\d\\e F\" }}\n",
+    1))
 for fichero, viejo, nuevo, veces in CAMBIOS:
     p = Path(fichero)
     s = p.read_text()

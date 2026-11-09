@@ -1,0 +1,72 @@
+/* Marín y Osorio, abogados: the values of its booking pages (pretix: the first consultation with each lawyer), from
+   its website: the paper of the desk, the blue ink of a fountain pen, Newsreader for the headings and Public Sans for
+   the text; each day of the diary a beige file folder, and each lawyer with the ink of their subject, like the tabs of
+   a filing cabinet (blue family, sepia inheritances, green employment, burgundy immigration). In light and dark, like
+   the website. To go in its vw/marca.css (with what `reservas marca` already writes). Jujol, 9 November 2026. */
+:root {
+    --vw-display: 'Newsreader', Georgia, serif;
+    --vw-body: 'Public Sans', system-ui, sans-serif;
+    --vw-bg: #EEE9E0;
+    --vw-surface: #FFFEF8;
+    --vw-surface-2: #F6F3EA;
+    --vw-line: rgba(29, 36, 51, 0.14);
+    --vw-text: #1D2433;
+    --vw-text-soft: #4F5566;
+    --vw-accent: #22398A;
+    --vw-on-accent: #FFFFFF;
+    --vw-accent-text: #22398A;
+    --vw-ok: #22398A;
+    --vw-on-ok: #FFFFFF;
+    --vw-warn: #E0C93A;
+    --vw-on-warn: #1D2433;
+    --vw-radius: 6px;
+    --vw-band-bg: #EEE9E0;
+    --vw-band-text: #1D2433;
+    --vw-day-bg: #E2CC9C;
+    --vw-day-text: #1D2433;
+    --vw-event-bg: #FFFEF8;
+    --vw-event-text: #1D2433;
+    --vw-event-text-soft: #4F5566;
+    --vw-tipos: "Familia:#22398A|Herencias:#7A5230|Laboral:#2E6B4A|Extranjería:#8A2F5E";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-bg: #12161E;
+        --vw-surface: #1A1F2A;
+        --vw-surface-2: #232A38;
+        --vw-line: #2C3342;
+        --vw-text: #ECE8DF;
+        --vw-text-soft: #B4B9C4;
+        --vw-accent: #A9BCF5;
+        --vw-on-accent: #12161E;
+        --vw-accent-text: #A9BCF5;
+        --vw-ok: #A9BCF5;
+        --vw-on-ok: #12161E;
+        --vw-warn: #E0C93A;
+        --vw-on-warn: #12161E;
+        --vw-band-bg: #12161E;
+        --vw-band-text: #ECE8DF;
+        --vw-day-bg: #3A3122;
+        --vw-day-text: #ECE8DF;
+        --vw-event-bg: #232A38;
+        --vw-event-text: #ECE8DF;
+        --vw-event-text-soft: #B4B9C4;
+        --vw-tipos: "Familia:#A9BCF5|Herencias:#D9B48A|Laboral:#93D3AC|Extranjería:#E5A3C4";
+    }
+}
+
+/* The name of the office and the headings, as on its website. */
+h1,
+h2,
+.h1,
+.h2 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.table-calendar .event-time,
+.week-calendar .event-time,
+.price {
+    font-variant-numeric: tabular-nums;
+}

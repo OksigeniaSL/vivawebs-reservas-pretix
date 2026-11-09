@@ -6,6 +6,8 @@ USER root
 
 # Arreglo: pretix no tenía en cuenta la subcarpeta /reservas/ en tres comparaciones (el panel de cada
 # evento daba error). Es un fallo de pretix; si cambian esas líneas en una versión nueva, el build falla.
+# pretix has no Spanish date formats of its own: ours («Semana del 9 al 15 de noviembre», «lun 9»).
+COPY formatos-es /pretix/src/pretix/helpers/formats/es
 COPY parches.py /tmp/parches.py
 RUN python3 /tmp/parches.py && rm /tmp/parches.py
 
