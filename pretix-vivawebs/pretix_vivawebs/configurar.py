@@ -4,6 +4,7 @@ Datos (JSON):
     slug, tipo ("clases" | "salas"), negocio, email, clave, zona, color, web, privacidad, aviso_legal,
     logo (data URI png/jpg/webp), demo (bool), fuente (URL del código fuente publicado),
     vista (opcional): «week», «calendar» o «list», la vista de la agenda (clases: semana, si no se dice otra),
+    portada (opcional): el texto de arriba de la página de reservas, si no vale el de su tipo,
     clases:  servicios: [{nombre, precio, descripcion, plazas, duracion (min), dias [0=lunes…], hora "HH:MM"}]
              bonos (opcional): [{nombre, precio, usos, meses, descripcion, servicios: [comienzos de nombre]}]
              Cada bono se vende en su propia agenda «bonos» (sin fechas) y da una membresía de pretix con
@@ -16,12 +17,17 @@ Datos (JSON):
              La matrícula de un grupo para todo un periodo, en su propia agenda «matriculas»: una sesión por
              grupo y periodo (el próximo trimestre: enero-marzo, abril-junio u octubre-diciembre; el intensivo,
              el próximo julio), con «plazas» de cupo. Se paga en el local, como las clases.
-    salas:   horario: {dias, desde "HH:MM", hasta "HH:MM", minutos}
+    salas:   horario: {dias, desde "HH:MM", hasta "HH:MM", minutos, nombre (opcional, el de cada franja: «Pista»;
+             si no, «Cita»)}
              recursos: [{nombre, cantidad}]
              servicios: [{nombre, precio, descripcion, usa: [nombres de recursos]}]
+             ocupadas (solo demos): fracción de 0 a 1 de recursos de una unidad que salen ya ocupados en cada franja,
+             siempre los mismos para la misma franja (más por la tarde, menos por la mañana). Así la demo de un club
+             enseña pistas ocupadas sin reservas de verdad, y la limpieza de cada noche no las vacía.
 Sin servicios, la agenda se crea vacía y el dueño los da de alta en su panel: no inventamos precios.
 """
 import base64
+import hashlib
 import re
 from datetime import date, datetime, time, timedelta
 from zoneinfo import ZoneInfo
@@ -67,6 +73,16 @@ def _hora(t):
     return time(h, m)
 
 
+def _ocupada(plan, ini, recurso) -> bool:
+    """Demo: whether this one-unit resource comes already taken in this slot (same answer every time it's asked)."""
+    parte = float(plan.get("ocupadas") or 0)
+    if parte <= 0 or int(recurso["cantidad"]) != 1:
+        return False
+    parte *= 1.5 if ini.hour >= 18 else 0.6 if ini.hour < 12 else 1   # evenings fill up, mornings are quiet
+    huella = hashlib.sha256(f"{ini.isoformat()}|{recurso['nombre']}".encode()).digest()
+    return huella[0] / 256 < min(parte, 0.9)
+
+
 def crear_sesiones(ev, plan, semanas=8, desde=None):
     """Crea (sin duplicar) las sesiones o franjas de las próximas semanas según el plan."""
     from pretix.base.models import Item, Quota, SubEvent
@@ -102,10 +118,10 @@ def crear_sesiones(ev, plan, semanas=8, desde=None):
             ini, fin_dia = datetime.combine(d, _hora(h["desde"]), tz), datetime.combine(d, _hora(h["hasta"]), tz)
             paso = timedelta(minutes=int(h.get("minutos", 60)))
             while ini + paso <= fin_dia:
-                cupos = [(r["nombre"], int(r["cantidad"]),
+                cupos = [(r["nombre"], 0 if _ocupada(plan, ini, r) else int(r["cantidad"]),
                           [s["nombre"] for s in plan.get("servicios", []) if r["nombre"] in s.get("usa", [])])
                          for r in plan.get("recursos", [])]
-                nueva(ini, ini + paso, "Cita", cupos)
+                nueva(ini, ini + paso, h.get("nombre") or "Cita", cupos)
                 ini += paso
     return nuevas
 
@@ -400,7 +416,7 @@ def configurar(d: dict) -> dict:
         for clave, valor in (("privacy_url", d.get("privacidad")), ("imprint_url", d.get("aviso_legal"))):
             if valor:
                 s.set(clave, ES(valor))
-        portada = PORTADA[tipo]
+        portada = d.get("portada") or PORTADA[tipo]   # a business's own words for its booking page
         if tipo == "clases" and d.get("bonos"):
             portada += " ¿Tienes bono? Elige la opción «con bono» de tu clase y entra con tu cuenta."
         s.frontpage_text = ES(portada)
@@ -429,6 +445,7 @@ def configurar(d: dict) -> dict:
             _matriculas(o, ev, d)
         plan = {"tipo": tipo, "servicios": d.get("servicios", []), "horario": d.get("horario"),
                 "recursos": d.get("recursos", []), "renovar": bool(d.get("demo")), "semanas": 6,
+                "ocupadas": d.get("ocupadas", 0) if d.get("demo") else 0,
                 "con_bono": con_bono}
         if d.get("demo"):
             s.vw_plan = plan
