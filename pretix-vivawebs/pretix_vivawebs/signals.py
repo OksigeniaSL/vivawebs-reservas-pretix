@@ -15,6 +15,7 @@ from django.utils.timezone import now
 from django_scopes import scopes_disabled
 from pretix.base.middleware import add_to_response_csp
 from pretix.base.signals import periodic_task
+from pretix.presale.signals import question_form_fields_overrides
 from pretix.presale.signals import (
     contact_form_fields, global_html_head, global_html_page_header, html_head, process_response,
 )
@@ -214,3 +215,25 @@ def periodico(sender, **kwargs):
             tarea()
         except Exception:
             logger.exception("tarea periódica de VivaWebs: %s", tarea.__name__)
+
+
+@receiver(question_form_fields_overrides, dispatch_uid="vivawebs_respuestas_previas")
+def respuestas_previas(sender, position=None, request=None, **kwargs):
+    """Questions already answered on the business's website (/reservas/?modalidad=…&nota=…, kept in the session):
+    they come filled in, and the person can still change them. Keys are the questions' identifiers."""
+    if request is None or not hasattr(request, "session"):
+        return {}
+    previas = request.session.get("vw_respuestas") or {}
+    if not previas:
+        return {}
+    from pretix.base.models import Question
+    out = {}
+    for q in sender.questions.filter(identifier__in=list(previas)):
+        valor = str(previas[q.identifier])
+        if q.type in (Question.TYPE_CHOICE, Question.TYPE_CHOICE_MULTIPLE):
+            op = next((o for o in q.options.all() if str(o.answer).lower().startswith(valor.lower())), None)
+            if op:
+                out[q.identifier] = {"initial": [op] if q.type == Question.TYPE_CHOICE_MULTIPLE else op}
+        elif q.type in (Question.TYPE_TEXT, Question.TYPE_STRING):
+            out[q.identifier] = {"initial": valor}
+    return out

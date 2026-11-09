@@ -47,7 +47,7 @@
    "usa": [
     "Pista 1"
    ],
-   "descripcion": "Cubierta: se juega llueva o haga viento. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Cubierta, de cristal: se juega llueva o haga viento. 90 minutos, la pista entera y la luz incluida."
   },
   {
    "nombre": "Pista 2 (cubierta)",
@@ -55,7 +55,7 @@
    "usa": [
     "Pista 2"
    ],
-   "descripcion": "Cubierta: se juega llueva o haga viento. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Cubierta, de cristal, junto a los vestuarios. 90 minutos, la pista entera y la luz incluida."
   },
   {
    "nombre": "Pista 3 (exterior)",
@@ -63,7 +63,7 @@
    "usa": [
     "Pista 3"
    ],
-   "descripcion": "Al aire libre, con césped nuevo. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Al aire libre, de muro. 90 minutos, la pista entera y la luz incluida."
   },
   {
    "nombre": "Pista 4 (exterior)",
@@ -71,7 +71,7 @@
    "usa": [
     "Pista 4"
    ],
-   "descripcion": "Al aire libre, con césped nuevo. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Al aire libre, de cristal. 90 minutos, la pista entera y la luz incluida."
   },
   {
    "nombre": "Pista 5 (exterior)",
@@ -79,17 +79,18 @@
    "usa": [
     "Pista 5"
    ],
-   "descripcion": "Al aire libre, con césped nuevo. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Al aire libre, de cristal. 90 minutos, la pista entera y la luz incluida."
   },
   {
-   "nombre": "Pista 6 (panorámica de cristal)",
+   "nombre": "Pista 6 · La Central (panorámica)",
    "precio": 26,
    "usa": [
     "Pista 6"
    ],
-   "descripcion": "Panorámica: cristal en los cuatro lados, la de los torneos. 90 minutos, la pista entera y la luz incluida."
+   "descripcion": "Panorámica, de cristal sin postes: la de los torneos. 90 minutos, la pista entera y la luz incluida."
   }
  ],
  "ocupadas": 0.45,
- "portada": "Elige el día, la hora y tu pista. Te llegará la confirmación por correo y un recordatorio el día antes. Se paga en el club."
+ "portada": "Elige el día, la hora y tu pista. Te llegará la confirmación por correo y un recordatorio el día antes. Se paga en el club.",
+ "vista": "week"
 }

@@ -18,9 +18,14 @@ Datos (JSON):
              grupo y periodo (el próximo trimestre: enero-marzo, abril-junio u octubre-diciembre; el intensivo,
              el próximo julio), con «plazas» de cupo. Se paga en el local, como las clases.
     salas:   horario: {dias, desde "HH:MM", hasta "HH:MM", minutos, nombre (opcional, el de cada franja: «Pista»;
-             si no, «Cita»)}
+             si no, «Cita»), duracion (opcional: lo que dura cada franja si es menos que el paso: consultas de 45 min
+             que empiezan cada hora)}, o una lista de esos tramos (mañana y tarde, otro horario el viernes…)
              recursos: [{nombre, cantidad}]
              servicios: [{nombre, precio, descripcion, usa: [nombres de recursos]}]
+             preguntas (opcional): [{texto, opciones: [..], obligatoria, clave, tipo}]: preguntas que hace la reserva,
+             para todos los servicios: de elegir una opción («¿Presencial o por videollamada?») o, con tipo «texto»,
+             de escribir. Con clave («modalidad», «nota»), la web del negocio la puede dejar contestada:
+             /reservas/?…&modalidad=Por videollamada&nota=… (la persona aún puede cambiarla).
              ocupadas (solo demos): fracción de 0 a 1 de recursos de una unidad que salen ya ocupados en cada franja,
              siempre los mismos para la misma franja (más por la tarde, menos por la mañana). Así la demo de un club
              enseña pistas ocupadas sin reservas de verdad, y la limpieza de cada noche no las vacía.
@@ -112,17 +117,19 @@ def crear_sesiones(ev, plan, semanas=8, desde=None):
                     nueva(ini, ini + timedelta(minutes=int(s.get("duracion", 60))), s["nombre"],
                           [(s["nombre"], int(s["plazas"]), [s["nombre"]] + plan.get("con_bono", {}).get(s["nombre"], []))])
         else:
-            h = plan.get("horario")
-            if not h or d.weekday() not in h.get("dias", []):
-                continue
-            ini, fin_dia = datetime.combine(d, _hora(h["desde"]), tz), datetime.combine(d, _hora(h["hasta"]), tz)
-            paso = timedelta(minutes=int(h.get("minutos", 60)))
-            while ini + paso <= fin_dia:
-                cupos = [(r["nombre"], 0 if _ocupada(plan, ini, r) else int(r["cantidad"]),
-                          [s["nombre"] for s in plan.get("servicios", []) if r["nombre"] in s.get("usa", [])])
-                         for r in plan.get("recursos", [])]
-                nueva(ini, ini + paso, h.get("nombre") or "Cita", cupos)
-                ini += paso
+            tramos = plan.get("horario") or []
+            for h in (tramos if isinstance(tramos, list) else [tramos]):
+                if d.weekday() not in h.get("dias", []):
+                    continue
+                ini, fin_dia = datetime.combine(d, _hora(h["desde"]), tz), datetime.combine(d, _hora(h["hasta"]), tz)
+                paso = timedelta(minutes=int(h.get("minutos", 60)))
+                dura = timedelta(minutes=int(h.get("duracion") or h.get("minutos", 60)))
+                while ini + dura <= fin_dia:
+                    cupos = [(r["nombre"], 0 if _ocupada(plan, ini, r) else int(r["cantidad"]),
+                              [s["nombre"] for s in plan.get("servicios", []) if r["nombre"] in s.get("usa", [])])
+                             for r in plan.get("recursos", [])]
+                    nueva(ini, ini + dura, h.get("nombre") or "Cita", cupos)
+                    ini += paso
     return nuevas
 
 
@@ -344,6 +351,27 @@ def _bonos(o, ev, d) -> dict:
     return con_bono
 
 
+def _preguntas(ev, preguntas) -> None:
+    """Choice questions the booking asks, for every service (same text: the same question, updated)."""
+    from pretix.base.models import Item, Question, QuestionOption
+    items = list(Item.objects.filter(event=ev))
+    for n, p in enumerate(preguntas):
+        tipo_q = Question.TYPE_TEXT if p.get("tipo") == "texto" else Question.TYPE_CHOICE
+        q = next((x for x in Question.objects.filter(event=ev) if str(x.question) == p["texto"]), None)
+        if not q:
+            q = Question.objects.create(event=ev, question=ES(p["texto"]), type=tipo_q)
+        if p.get("clave"):
+            q.identifier = p["clave"]
+        q.required = bool(p.get("obligatoria", True))
+        q.position = n
+        q.save()
+        q.items.set(items)
+        tienen = {str(o.answer) for o in q.options.all()}
+        for k, texto in enumerate(p.get("opciones", [])):
+            if texto not in tienen:
+                QuestionOption.objects.create(question=q, answer=ES(texto), position=k)
+
+
 def configurar(d: dict) -> dict:
     from pretix.base.models import (
         Event, Item, NotificationSetting, Organizer, Team, User,
@@ -440,6 +468,7 @@ def configurar(d: dict) -> dict:
             if sv.get("descripcion"):
                 it.description = ES(sv["descripcion"])
             it.save()
+        _preguntas(ev, d.get("preguntas") or [])
         con_bono = _bonos(o, ev, d) if tipo == "clases" and d.get("bonos") else {}
         if tipo == "clases" and d.get("matriculas"):
             _matriculas(o, ev, d)

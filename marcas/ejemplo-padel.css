@@ -1,0 +1,76 @@
+/* Volea Pádel Club: the values of its booking pages (pretix: rooms and spaces, a slot and its court), from its
+   website: the night band of the club on top, the lime of the lines as the page, the blue of the court carpet for
+   the buttons and the yellow of the ball for what is free at night. The name and the numbers in Bricolage Grotesque
+   Ancho, narrowed and in capitals; the text in Familjen Grotesk. Each court with the colour of its kind: blue the
+   covered ones, concrete the walled one, glass green the glass ones and ball yellow the Central. In light and dark,
+   like the website. To go in its vw/marca.css (with what `reservas marca` already writes). Jujol, 9 November 2026. */
+:root {
+    --vw-display: 'Bricolage Grotesque Ancho', 'Bricolage Grotesque', system-ui, sans-serif;
+    --vw-body: 'Familjen Grotesk', system-ui, sans-serif;
+    --vw-bg: #F3F1EA;
+    --vw-surface: #FFFFFF;
+    --vw-surface-2: #EDEAE1;
+    --vw-line: rgba(20, 32, 42, 0.14);
+    --vw-text: #14202A;
+    --vw-text-soft: #4E5A63;
+    --vw-accent: #1F5FA8;
+    --vw-on-accent: #FFFFFF;
+    --vw-accent-text: #1F5FA8;
+    --vw-ok: #2D6E63;
+    --vw-on-ok: #FFFFFF;
+    --vw-warn: #C98A23;
+    --vw-on-warn: #14202A;
+    --vw-radius: 10px;
+    --vw-band-bg: #070B14;
+    --vw-band-text: #EEF1EC;
+    --vw-day-bg: #E8EEF6;
+    --vw-day-text: #14202A;
+    --vw-event-bg: #FFFFFF;
+    --vw-event-text: #14202A;
+    --vw-event-text-soft: #4E5A63;
+    --vw-tipos: "Pista 1:#1F5FA8|Pista 2:#1F5FA8|Pista 3:#7A8691|Pista 4:#2D6E63|Pista 5:#2D6E63|Pista 6:#C9D63A";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-bg: #070B14;
+        --vw-surface: #0E1524;
+        --vw-surface-2: #18233A;
+        --vw-line: #2A3550;
+        --vw-text: #EEF1EC;
+        --vw-text-soft: #A9B4B8;
+        --vw-accent: #E3F04B;
+        --vw-on-accent: #070B14;
+        --vw-accent-text: #E3F04B;
+        --vw-ok: #E3F04B;
+        --vw-on-ok: #070B14;
+        --vw-warn: #E3B15C;
+        --vw-on-warn: #070B14;
+        --vw-band-bg: #070B14;
+        --vw-band-text: #EEF1EC;
+        --vw-day-bg: #111A2C;
+        --vw-day-text: #EEF1EC;
+        --vw-event-bg: #18233A;
+        --vw-event-text: #EEF1EC;
+        --vw-event-text-soft: #A9B4B8;
+        --vw-tipos: "Pista 1:#8DB8F0|Pista 2:#8DB8F0|Pista 3:#A9B4B8|Pista 4:#9ED3C4|Pista 5:#9ED3C4|Pista 6:#E3F04B";
+    }
+}
+
+/* The name of the club and the headings, as on its website: narrowed and in capitals. */
+h1,
+h2,
+.h1,
+.h2 {
+    font-stretch: 75%;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+}
+
+/* The hours of each slot, in the figures of the scoreboard. */
+.table-calendar .event-time,
+.week-calendar .event-time,
+.price {
+    font-variant-numeric: tabular-nums;
+}

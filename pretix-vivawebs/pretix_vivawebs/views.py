@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django_scopes import scopes_disabled
 
 from .exportar import csv_reservas
@@ -54,8 +55,11 @@ def _url_sesion(ev, se, item=None) -> str:
     return eventreverse(ev, "presale:event.index", kwargs={"subevent": se.pk}) + (f"?item={item.pk}" if item else "")
 
 
+@csrf_exempt   # a static website posts here; all it can do is fill in the person's own booking form
 def inicio(request):
     """/reservas/ abre directamente la página de reservas del negocio (cada instalación tiene una).
+    Lo que la persona ha escrito (una nota sobre su caso) mejor por POST, con un formulario: así no queda en la
+    dirección, ni en los registros del servidor ni en el historial; por GET vale para lo que no es personal.
     Con ?dia=AAAA-MM-DD&hora=HH:MM (y ?servicio=, el comienzo del nombre: «Pista 6») abre esa franja con ese servicio
     ya elegido: así la web del negocio lleva a la reserva con todo puesto. Si la franja no existe, la página de reservas."""
     from pretix.multidomain.urlreverse import eventreverse
@@ -63,7 +67,13 @@ def inicio(request):
     ev = _evento()
     if not ev:
         raise Http404()
-    dia, hora = request.GET.get("dia", ""), request.GET.get("hora", "")
+    with scopes_disabled():
+        claves = set(ev.questions.exclude(identifier="").values_list("identifier", flat=True))
+    datos = request.POST if request.method == "POST" else request.GET
+    previas = {k: v[:1000] for k, v in datos.items() if k in claves and v.strip()}
+    if previas:   # answers already given on the website (modalidad, nota…): the booking comes with them filled in
+        request.session["vw_respuestas"] = previas
+    dia, hora = datos.get("dia", ""), datos.get("hora", "")
     if _DIA.match(dia) and _HORA.match(hora):
         with scopes_disabled():
             try:
@@ -72,8 +82,35 @@ def inicio(request):
                 sesiones = None
             se = next((x for x in sesiones if x.date_from.astimezone(tz).strftime("%H:%M") == hora), None) if sesiones is not None else None
             if se:
-                return HttpResponseRedirect(_url_sesion(ev, se, _servicio(ev, request.GET.get("servicio", "")[:80])))
+                return HttpResponseRedirect(_url_sesion(ev, se, _servicio(ev, datos.get("servicio", "")[:80])))
     return HttpResponseRedirect(eventreverse(ev, "presale:event.index"))
+
+
+def proximas(request):
+    """/reservas/vw-proximas: the next free slot of each service (within the slots already created), with its link:
+    «la próxima, el martes a las 10:00» on the business's website."""
+    ev = _evento()
+    if not ev or not ev.has_subevents:
+        raise Http404()
+    with scopes_disabled():
+        tz = ZoneInfo(ev.settings.timezone)
+        items = list(ev.items.filter(active=True).order_by("position", "pk"))
+        faltan = {it.pk: it for it in items}
+        out = {}
+        for se in ev.subevents.filter(active=True, date_from__gt=datetime.now(tz)).order_by("date_from")[:600]:
+            for pk, it in list(faltan.items()):
+                codigo, _ = it.check_quotas(subevent=se, fail_on_no_quotas=True)
+                if codigo == 100:
+                    local = se.date_from.astimezone(tz)
+                    out[str(it.name)] = {"dia": local.date().isoformat(), "hora": local.strftime("%H:%M"),
+                                         "reservar": _url_sesion(ev, se, it)}
+                    del faltan[pk]
+            if not faltan:
+                break
+    r = JsonResponse({"negocio": str(ev.name), "servicios": out}, json_dumps_params={"ensure_ascii": False})
+    r["Cache-Control"] = "public, max-age=60"
+    r["X-Robots-Tag"] = "noindex"
+    return r
 
 
 def libres(request):

@@ -1,0 +1,121 @@
+{
+ "horario": [
+  {
+   "dias": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "desde": "09:00",
+   "hasta": "14:00",
+   "minutos": 60,
+   "duracion": 45,
+   "nombre": "Consulta"
+  },
+  {
+   "dias": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "desde": "17:00",
+   "hasta": "19:30",
+   "minutos": 60,
+   "duracion": 45,
+   "nombre": "Consulta"
+  },
+  {
+   "dias": [
+    4
+   ],
+   "desde": "09:00",
+   "hasta": "14:00",
+   "minutos": 60,
+   "duracion": 45,
+   "nombre": "Consulta"
+  }
+ ],
+ "recursos": [
+  {
+   "nombre": "Elena Marín",
+   "cantidad": 1
+  },
+  {
+   "nombre": "Javier Osorio",
+   "cantidad": 1
+  },
+  {
+   "nombre": "Lucía Prieto",
+   "cantidad": 1
+  },
+  {
+   "nombre": "Daniel Ferrer",
+   "cantidad": 1
+  }
+ ],
+ "servicios": [
+  {
+   "nombre": "Familia, con Elena Marín",
+   "precio": 60,
+   "usa": [
+    "Elena Marín"
+   ],
+   "descripcion": "Primera consulta de 45 minutos, en el despacho o por videollamada. Si nos encargas el asunto, los 60 € se descuentan."
+  },
+  {
+   "nombre": "Herencias y sucesiones, con Javier Osorio",
+   "precio": 60,
+   "usa": [
+    "Javier Osorio"
+   ],
+   "descripcion": "Primera consulta de 45 minutos, en el despacho o por videollamada. Si nos encargas el asunto, los 60 € se descuentan."
+  },
+  {
+   "nombre": "Laboral, con Lucía Prieto",
+   "precio": 60,
+   "usa": [
+    "Lucía Prieto"
+   ],
+   "descripcion": "Primera consulta de 45 minutos, en el despacho o por videollamada. Si nos encargas el asunto, los 60 € se descuentan."
+  },
+  {
+   "nombre": "Extranjería, con Daniel Ferrer",
+   "precio": 60,
+   "usa": [
+    "Daniel Ferrer"
+   ],
+   "descripcion": "Primera consulta de 45 minutos, en el despacho o por videollamada. Si nos encargas el asunto, los 60 € se descuentan."
+  }
+ ],
+ "preguntas": [
+  {
+   "texto": "¿Cómo prefieres la consulta?",
+   "opciones": [
+    "En el despacho",
+    "Por videollamada"
+   ],
+   "obligatoria": true,
+   "clave": "modalidad"
+  },
+  {
+   "texto": "¿Tienes ya documentos de tu caso?",
+   "opciones": [
+    "Sí, los llevaré a la consulta",
+    "Todavía no"
+   ],
+   "obligatoria": true,
+   "clave": "documentos"
+  },
+  {
+   "texto": "Cuéntanos en pocas palabras qué te pasa (opcional)",
+   "tipo": "texto",
+   "obligatoria": false,
+   "clave": "nota"
+  }
+ ],
+ "ocupadas": 0.35,
+ "vista": "week",
+ "portada": "Elige tu asunto, el día y la hora de tu primera consulta: 45 minutos, en el despacho (calle del Prado, 14, 2.º) o por videollamada. Se paga en el despacho y, si nos encargas el asunto, se descuenta."
+}
