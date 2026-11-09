@@ -1,0 +1,189 @@
+{
+ "servicios": [
+  {
+   "nombre": "Inglés A2 · Básico",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    0,
+    2
+   ],
+   "hora": "17:30",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Inglés B1 · Intermedio",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    0,
+    2
+   ],
+   "hora": "19:00",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Inglés B2 · Intermedio alto",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    1,
+    3
+   ],
+   "hora": "19:00",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Inglés C1 · Avanzado",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 120,
+   "dias": [
+    4
+   ],
+   "hora": "17:00",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Francés A1 · Inicial",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    1,
+    3
+   ],
+   "hora": "18:00",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Francés B1 · Intermedio",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    0,
+    2
+   ],
+   "hora": "20:30",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Alemán A1 · Inicial",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    1,
+    3
+   ],
+   "hora": "20:30",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Alemán A2 · Básico",
+   "precio": 0,
+   "plazas": 0,
+   "duracion": 120,
+   "dias": [
+    4
+   ],
+   "hora": "19:00",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  },
+  {
+   "nombre": "Italiano A1 · Inicial",
+   "precio": 0,
+   "plazas": 2,
+   "duracion": 90,
+   "dias": [
+    0,
+    2
+   ],
+   "hora": "17:30",
+   "descripcion": "Clase de prueba gratis con el grupo. Ven diez minutos antes: te presentamos al grupo y, si no encajas, te buscamos otro."
+  }
+ ],
+ "matriculas": [
+  {
+   "nombre": "Inglés A2 · Básico",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 6,
+   "descripcion": "Lunes y miércoles, de 17:30 a 19:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Inglés B1 · Intermedio",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 4,
+   "descripcion": "Lunes y miércoles, de 19:00 a 20:30. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Inglés B2 · Intermedio alto",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 5,
+   "descripcion": "Martes y jueves, de 19:00 a 20:30. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Inglés C1 · Avanzado",
+   "periodo": "trimestre",
+   "precio": 165,
+   "plazas": 3,
+   "descripcion": "Los viernes, de 17:00 a 19:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Francés A1 · Inicial",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 7,
+   "descripcion": "Martes y jueves, de 18:00 a 19:30. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Francés B1 · Intermedio",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 5,
+   "descripcion": "Lunes y miércoles, de 20:30 a 22:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Alemán A1 · Inicial",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 6,
+   "descripcion": "Martes y jueves, de 20:30 a 22:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Alemán A2 · Básico",
+   "periodo": "trimestre",
+   "precio": 165,
+   "plazas": 0,
+   "descripcion": "Los viernes, de 19:00 a 21:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Italiano A1 · Inicial",
+   "periodo": "trimestre",
+   "precio": 195,
+   "plazas": 8,
+   "descripcion": "Lunes y miércoles, de 17:30 a 19:00. El trimestre entero, con el aula virtual y la app incluidas. Libro aparte."
+  },
+  {
+   "nombre": "Intensivo de inglés B1",
+   "periodo": "intensivo",
+   "precio": 290,
+   "plazas": 10,
+   "descripcion": "De lunes a jueves, de 10:00 a 13:00, todo julio. Para llegar a septiembre con el nivel hecho."
+  },
+  {
+   "nombre": "Intensivo de alemán A1",
+   "periodo": "intensivo",
+   "precio": 290,
+   "plazas": 8,
+   "descripcion": "De lunes a jueves, de 10:00 a 13:00, todo julio. Desde cero, para quien se va a trabajar o a estudiar."
+  }
+ ]
+}

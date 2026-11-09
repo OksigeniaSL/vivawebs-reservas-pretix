@@ -12,6 +12,10 @@ Datos (JSON):
              El cliente necesita cuenta (se activan las cuentas de cliente del negocio).
              cuenta_prueba (solo demos): {email, clave}: cuenta de cliente con un bono de cada tipo, para
              probar la reserva con bono sin comprarlo (en las demos no sale ningún correo).
+             matriculas (opcional): [{nombre, periodo: "trimestre" | "intensivo", precio, plazas, descripcion}]
+             La matrícula de un grupo para todo un periodo, en su propia agenda «matriculas»: una sesión por
+             grupo y periodo (el próximo trimestre: enero-marzo, abril-junio u octubre-diciembre; el intensivo,
+             el próximo julio), con «plazas» de cupo. Se paga en el local, como las clases.
     salas:   horario: {dias, desde "HH:MM", hasta "HH:MM", minutos}
              recursos: [{nombre, cantidad}]
              servicios: [{nombre, precio, descripcion, usa: [nombres de recursos]}]
@@ -117,6 +121,95 @@ def _logo(ev, data_uri):
 
 PORTADA_BONOS = ("Compra aquí tu bono. Lo pagas en {negocio} y, desde ese momento, reservas tus clases con tu "
                  "cuenta: cada clase descuenta un uso.")
+
+
+PORTADA_MATRICULAS = ("Reserva tu plaza en el grupo para todo el periodo. La matrícula la pagas en {negocio} el primer "
+                      "día de clase.")
+MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre",
+         "diciembre"]
+
+
+def _periodo(tipo: str, hoy: date) -> tuple[date, date, str]:
+    """The next term (January-March, April-June, October-December) or the next July intensive, from today."""
+    if tipo == "intensivo":
+        y = hoy.year if hoy < date(hoy.year, 7, 1) else hoy.year + 1
+        return date(y, 7, 1), date(y, 7, 31), f"julio de {y}"
+    for y in (hoy.year, hoy.year + 1):
+        for m_ini, m_fin, fin in ((1, 3, 31), (4, 6, 30), (10, 12, 20)):
+            ini = date(y, m_ini, 1)
+            if ini > hoy:
+                return ini, date(y, m_fin, fin), f"{MESES[m_ini - 1]} a {MESES[m_fin - 1]} de {y}"
+    raise ValueError("sin periodo")
+
+
+def crear_matriculas(em, entradas, hoy=None) -> int:
+    """The enrolment sessions of each group for its next period (without duplicates), in the «matriculas» event."""
+    from pretix.base.models import Item, Quota, SubEvent
+
+    tz = ZoneInfo(em.settings.timezone)
+    hoy = hoy or datetime.now(tz).date()
+    items = {str(i.name): i for i in Item.objects.filter(event=em)}
+    existentes = {str(n) for n in em.subevents.values_list("name", flat=True)}
+    nuevas = 0
+    for m in entradas:
+        ini, fin, etiqueta = _periodo(m.get("periodo", "trimestre"), hoy)
+        nombre = f"{m['nombre']} · {etiqueta}"
+        if nombre in existentes or m["nombre"] not in items:
+            continue
+        se = SubEvent.objects.create(event=em, name=ES(nombre), active=True,
+                                     date_from=datetime.combine(ini, time(9, 0), tz),
+                                     date_to=datetime.combine(fin, time(21, 0), tz),
+                                     presale_end=datetime.combine(fin, time(12, 0), tz))
+        q = Quota.objects.create(event=em, subevent=se, name=m["nombre"], size=int(m["plazas"]))
+        q.items.add(items[m["nombre"]])
+        nuevas += 1
+    return nuevas
+
+
+def _matriculas(o, ev, d) -> int:
+    """Group enrolments for a whole term or the summer intensive (academies): their own event, like the passes."""
+    from pretix.base.models import Event, Item
+
+    em = Event.objects.filter(organizer=o, slug="matriculas").first()
+    if not em:
+        em = Event.objects.create(organizer=o, slug="matriculas", name=ES(f"Matrículas de {d['negocio']}"), currency="EUR",
+                                  date_from=now(), has_subevents=True, live=False)
+        em.set_defaults()
+    em.name = ES(f"Matrículas de {d['negocio']}")
+    em.testmode = ev.testmode
+    for p in ("pretix.plugins.ticketoutputpdf", "pretix.plugins.ticketoutputpassbook"):
+        if p in (em.plugins or ""):
+            em.disable_plugin(p)
+    em.enable_plugin("pretix.plugins.manualpayment")
+    em.enable_plugin("pretix_vivawebs")
+    for clave in ("locale", "locales", "region", "timezone", "order_phone_asked", "order_phone_required",
+                  "invoice_address_asked", "invoice_name_required", "ticket_download",
+                  "payment_term_expire_automatically", "payment_pending_hidden", "mail_days_order_expire_warning",
+                  "mail_subject_order_placed", "mail_text_order_placed", "mail_subject_order_free",
+                  "mail_text_order_free", "cancel_allow_user", "mail_from_name", "contact_mail", "primary_color",
+                  "privacy_url", "imprint_url", "payment_manual__enabled", "payment_manual_public_name",
+                  "payment_manual_checkout_description", "payment_manual_email_instructions",
+                  "payment_manual_pending_description", "meta_noindex", "logo_image", "waiting_list_enabled"):
+        if ev.settings.get(clave) is not None:
+            em.settings.set(clave, ev.settings.get(clave))
+    em.settings.frontpage_text = ES(PORTADA_MATRICULAS.format(negocio=d["negocio"]))
+    em.settings.event_list_type = "list"
+    em.settings.show_date_to = True
+    em.settings.show_times = False
+    for n, m in enumerate(d["matriculas"]):
+        it, _ = Item.objects.get_or_create(event=em, name=ES(m["nombre"]),
+                                           defaults={"default_price": m["precio"], "admission": True})
+        it.default_price = m["precio"]
+        it.position = n * 10
+        if m.get("descripcion"):
+            it.description = ES(m["descripcion"])
+        it.save()
+    nuevas = crear_matriculas(em, d["matriculas"])
+    if d.get("demo"):
+        em.settings.vw_matriculas = d["matriculas"]   # the demo makes the next period's by itself
+    em.live = True
+    em.save()
+    return nuevas
 
 
 def _cuenta_prueba(o, tipos, cp) -> None:
@@ -332,6 +425,8 @@ def configurar(d: dict) -> dict:
                 it.description = ES(sv["descripcion"])
             it.save()
         con_bono = _bonos(o, ev, d) if tipo == "clases" and d.get("bonos") else {}
+        if tipo == "clases" and d.get("matriculas"):
+            _matriculas(o, ev, d)
         plan = {"tipo": tipo, "servicios": d.get("servicios", []), "horario": d.get("horario"),
                 "recursos": d.get("recursos", []), "renovar": bool(d.get("demo")), "semanas": 6,
                 "con_bono": con_bono}

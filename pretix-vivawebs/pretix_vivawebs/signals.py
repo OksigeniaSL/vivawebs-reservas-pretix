@@ -195,13 +195,16 @@ def _mantener_demos():
     """Las demos de escaparate (ajuste vw_plan) generan solas sus sesiones de las próximas semanas."""
     from pretix.base.models import Event
 
-    from .configurar import crear_sesiones
+    from .configurar import crear_matriculas, crear_sesiones
 
     with scopes_disabled():
         for ev in Event.objects.filter(plugins__contains="pretix_vivawebs"):
             plan = ev.settings.get("vw_plan", as_type=dict, default=None)
             if plan and plan.get("renovar"):
                 crear_sesiones(ev, plan, semanas=plan.get("semanas", 6))
+            matriculas = ev.settings.get("vw_matriculas", as_type=list, default=None)
+            if matriculas:   # demos: the enrolments of the next term and of the next July intensive
+                crear_matriculas(ev, matriculas)
 
 
 @receiver(periodic_task, dispatch_uid="vivawebs_periodico")

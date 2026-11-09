@@ -1,0 +1,46 @@
+/* Academia Meridiano: the values of its booking pages (pretix: trial classes and enrolments), from its website: the
+   dictionary paper, the fountain-pen ink, and the ink of each language for its groups (blue for English, the violet
+   ink of French schools, green for German, sepia for Italian). In light and dark, like the website. Its hand-made
+   brand (instancias/ejemplo-academia/marca-propia.css). Jujol, 9 November 2026. */
+:root {
+    --vw-display: 'Bricolage Grotesque Ancho', 'Bricolage Grotesque', system-ui, sans-serif;
+    --vw-body: 'Public Sans', system-ui, sans-serif;
+    --vw-bg: #EEE8DC;
+    --vw-surface: #FBF8F2;
+    --vw-surface-2: #F3EEE3;
+    --vw-line: rgba(31, 58, 138, 0.16);
+    --vw-text: #1F3A8A;
+    --vw-text-soft: #4A5577;
+    --vw-accent: #1F3A8A;
+    --vw-on-accent: #FBF8F2;
+    --vw-accent-text: #1F3A8A;
+    --vw-ok: #2E6B4A;
+    --vw-on-ok: #FBF8F2;
+    --vw-warn: #F6E27A;
+    --vw-on-warn: #1F3A8A;
+    --vw-radius: 6px;
+    --vw-band-bg: #FBF8F2;
+    --vw-band-text: #1F3A8A;
+    --vw-tipos: "Inglés:#1F3A8A|Francés:#6B3FA0|Alemán:#2E6B4A|Italiano:#8A5A2B|Intensivo de inglés:#1F3A8A|Intensivo de alemán:#2E6B4A";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-bg: #0A0F20;
+        --vw-surface: #111A35;
+        --vw-surface-2: #18234A;
+        --vw-line: rgba(236, 231, 219, 0.14);
+        --vw-text: #ECE7DB;
+        --vw-text-soft: #B9BFD3;
+        --vw-accent: #AFC2F7;
+        --vw-on-accent: #0F1730;
+        --vw-accent-text: #AFC2F7;
+        --vw-ok: #93D3AC;
+        --vw-on-ok: #0F1730;
+        --vw-warn: #F6E27A;
+        --vw-on-warn: #1F3A8A;
+        --vw-band-bg: #111A35;
+        --vw-band-text: #ECE7DB;
+        --vw-tipos: "Inglés:#AFC2F7|Francés:#CDAEEE|Alemán:#93D3AC|Italiano:#E3BC92|Intensivo de inglés:#AFC2F7|Intensivo de alemán:#93D3AC";
+    }
+}
