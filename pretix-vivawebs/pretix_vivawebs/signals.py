@@ -45,7 +45,8 @@ def _en_reserva(request):
 def hojas(sender, request=None, **kwargs):
     """Our skin and the business's brand on every page: the event pages and also the organizer ones (log in,
     customer account), which do not get the event signals."""
-    partes = [format_html('<link rel="stylesheet" href="{}">', static("pretix_vivawebs/vivawebs.css"))]
+    partes = [format_html('<link rel="stylesheet" href="{}"><script src="{}" defer></script>',
+                          static("pretix_vivawebs/vivawebs.css"), static("pretix_vivawebs/piel.js"))]
     if os.path.isfile(MARCA):
         partes.append(format_html('<link rel="stylesheet" href="/vendor/fonts/fonts.css">'
                                   '<link rel="stylesheet" href="{}vw/marca.css?m={}">',

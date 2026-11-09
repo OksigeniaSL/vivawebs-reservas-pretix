@@ -3,6 +3,7 @@
 Datos (JSON):
     slug, tipo ("clases" | "salas"), negocio, email, clave, zona, color, web, privacidad, aviso_legal,
     logo (data URI png/jpg/webp), demo (bool), fuente (URL del código fuente publicado),
+    vista (opcional): «week», «calendar» o «list», la vista de la agenda (clases: semana, si no se dice otra),
     clases:  servicios: [{nombre, precio, descripcion, plazas, duracion (min), dias [0=lunes…], hora "HH:MM"}]
              bonos (opcional): [{nombre, precio, usos, meses, descripcion, servicios: [comienzos de nombre]}]
              Cada bono se vende en su propia agenda «bonos» (sin fechas) y da una membresía de pretix con
@@ -283,6 +284,9 @@ def configurar(d: dict) -> dict:
         s.show_times = True
         s.show_date_to = True
         s.waiting_list_enabled = tipo == "clases"
+        # Classes repeat every week: the week reads better than the whole month (the month stays as an option).
+        if d.get("vista") or tipo == "clases":
+            s.event_list_type = d.get("vista") or "week"
         s.order_phone_asked = True
         s.order_phone_required = True
         s.invoice_address_asked = False

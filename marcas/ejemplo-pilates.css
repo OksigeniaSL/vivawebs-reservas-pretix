@@ -1,0 +1,71 @@
+/* Estudio Vértebra: the values of its booking pages, from the tokens of its website (estilo.css): the aluminium of
+   the reformer rails, the navy upholstery, the spring colours for each kind of class, and the mat with its pieces of
+   maple in the calendar. To go in its vw/marca.css (with what `reservas marca` already writes). Jujol, 8 Nov 2026. */
+:root {
+    --vw-display: 'Instrument Sans', system-ui, sans-serif;
+    --vw-body: 'Instrument Sans', system-ui, sans-serif;
+    --vw-bg: #ECEEF0;
+    --vw-surface: #FFFFFF;
+    --vw-surface-2: #F3F4F6;
+    --vw-line: rgba(30, 42, 68, 0.14);
+    --vw-text: #1E2A44;
+    --vw-text-soft: #4A5468;
+    --vw-accent: #1E2A44;
+    --vw-on-accent: #ECEEF0;
+    --vw-accent-text: #2B63C4;
+    --vw-ok: #2A7F48;
+    --vw-on-ok: #FFFFFF;
+    --vw-warn: #E9B820;
+    --vw-on-warn: #1E2A44;
+    --vw-radius: 10px;
+    --vw-band-bg: #1E2A44;
+    --vw-band-text: #ECEEF0;
+    --vw-day-bg: #1E2A44;
+    --vw-day-text: #ECEEF0;
+    --vw-event-bg: #F3EBDD;
+    --vw-event-text: #1E2A44;
+    --vw-event-text-soft: #4A5468;
+    --vw-tipos: "Reformer:#C8372F|Pilates suelo:#2B63C4|Yoga:#D4A20C|Espalda sana:#2A7F48|Clase de prueba:#E9B820";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-bg: #0A0F1B;
+        --vw-surface: #131A2C;
+        --vw-surface-2: #1B2338;
+        --vw-line: rgba(236, 238, 240, 0.14);
+        --vw-text: #ECEEF0;
+        --vw-text-soft: #AEB6C6;
+        --vw-accent: #ECEEF0;
+        --vw-on-accent: #0A0F1B;
+        --vw-accent-text: #7FA6F0;
+        --vw-ok: #5FBF86;
+        --vw-on-ok: #0A0F1B;
+        --vw-warn: #E9B820;
+        --vw-on-warn: #1E2A44;
+        --vw-band-bg: #131A2C;
+        --vw-band-text: #ECEEF0;
+        --vw-day-bg: #283860;
+        --vw-day-text: #ECEEF0;
+        --vw-event-bg: #3A4C74;
+        --vw-event-text: #ECEEF0;
+        --vw-event-text-soft: #C9CFDA;
+    }
+}
+
+/* A day with classes is a mat: its grip texture, from the website's own image. Days without classes stay floor. */
+.table-calendar td.day.has-events,
+.table-calendar td.day.has-events:nth-child(even),
+.week-calendar .weekday:has(.event),
+.week-calendar .weekday:nth-child(even):has(.event) {
+    background-image: url("/img/esterilla.webp?v=20261108a");
+    background-size: 96px 96px;
+    background-blend-mode: soft-light;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 10px 14px -12px rgba(255, 255, 255, 0.22);
+}
+
+/* The name of the studio, as on its website. */
+.page-header h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -0.04em;
+}
