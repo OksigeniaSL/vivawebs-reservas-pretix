@@ -134,6 +134,7 @@
         var k = kindOf(text);
         if (k) {
             el.style.setProperty('--tipo', k.colour);
+            el.setAttribute('data-vw-tipo', k.name);
         }
     };
     Array.prototype.forEach.call(document.querySelectorAll('.event'), function (ev) {
@@ -152,22 +153,90 @@
             }
         });
         if (seen.length > 1) {
+            // The legend filters (Kimi, tenth round: it looked like filters and was not): touch «Yoga» and the week
+            // shows only yoga; touch it again, or «Todas», and everything is back. A day with none of it says so.
+            var lang = (document.documentElement.lang || 'es').slice(0, 2);
+            var SAY = {
+                es: {all: 'Todas', group: 'Ver solo un tipo de clase', none: function (n) { return 'Sin ' + n + ' este día'; }},
+                en: {all: 'All', group: 'Show one kind of class', none: function (n) { return 'No ' + n + ' this day'; }},
+                de: {all: 'Alle', group: 'Nur eine Kursart zeigen', none: function (n) { return 'Kein ' + n + ' an diesem Tag'; }}
+            };
+            var say = SAY[lang] || SAY.es;
             var legend = document.createElement('ul');
-            legend.className = 'vw-leyenda';
-            legend.setAttribute('aria-label', 'Tipos de clase');
+            legend.className = 'vw-leyenda vw-filtros';
+            legend.setAttribute('aria-label', say.group);
+            var chosen = null;
+            var buttons = [];
+            var filter = function () {
+                legend.classList.toggle('vw-filtrando', !!chosen);
+                buttons.forEach(function (b) {
+                    var on = (b.getAttribute('data-tipo') || null) === chosen;
+                    b.setAttribute('aria-pressed', String(on));
+                    b.parentNode.classList.toggle('vw-activo', on);
+                });
+                Array.prototype.forEach.call(calendar.querySelectorAll('ul.events'), function (list) {
+                    var shown = 0;
+                    var events = 0;
+                    Array.prototype.forEach.call(list.children, function (li) {
+                        var ev = li.querySelector('a.event');
+                        if (!ev) {
+                            return;
+                        }
+                        events++;
+                        var out = !!chosen && ev.getAttribute('data-vw-tipo') !== chosen;
+                        li.classList.toggle('vw-filtrada', out);
+                        if (!out && !li.hidden) {
+                            shown++;
+                        }
+                    });
+                    var empty = list.querySelector('.vw-sin-filtro');
+                    var need = chosen && events && !shown && !list.querySelector('.vw-cerradas');
+                    if (need && !empty) {
+                        empty = document.createElement('li');
+                        empty.className = 'vw-sin-filtro';
+                        list.appendChild(empty);
+                    }
+                    if (empty) {
+                        empty.hidden = !need;
+                        if (need) {
+                            empty.textContent = say.none(chosen);
+                        }
+                    }
+                });
+            };
+            var chip = function (label, kind, colour) {
+                var li = document.createElement('li');
+                if (colour) {
+                    li.style.setProperty('--tipo', colour);
+                } else {
+                    li.className = 'vw-todas';
+                }
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.textContent = label;
+                if (kind) {
+                    b.setAttribute('data-tipo', kind);
+                }
+                b.addEventListener('click', function () {
+                    chosen = kind && chosen !== kind ? kind : null;
+                    filter();
+                });
+                li.appendChild(b);
+                buttons.push(b);
+                legend.appendChild(li);
+            };
+            chip(say.all, null, null);
             raw.split('|').forEach(function (pair) {
                 var i = pair.lastIndexOf(':');
                 var name = pair.slice(0, i).trim();
                 var kind = seen.filter(function (k) { return k.name === name.toLowerCase(); })[0];
                 if (kind) {
-                    var li = document.createElement('li');
-                    li.style.setProperty('--tipo', kind.colour);
-                    li.textContent = name;
-                    legend.appendChild(li);
+                    chip(name, kind.name, kind.colour);
                 }
             });
             var nav = document.querySelector('.calendar-nav');
             (nav || calendar).parentNode.insertBefore(legend, nav ? nav.nextSibling : calendar);
+            filter();
         }
     }
     Array.prototype.forEach.call(document.querySelectorAll('.product-row'), function (row) {

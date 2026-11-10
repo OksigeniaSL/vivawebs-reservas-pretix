@@ -1891,3 +1891,64 @@ html[lang^="de"] .vw-forma-pistas .week-calendar .weekday.today h3::after { cont
 .day-calendar ul.events > .vw-tramo:first-child {
     margin-top: 2px;
 }
+
+/* ===================================================================== tenth round (Kimi, 10 November 2026) */
+/* The legend of the kinds filters the week (piel.js): each chip a button, «Todas» first; the chosen one ringed in its
+   colour, the others dimmed; a day with none of the kind says so. */
+.vw-filtros li {
+    padding: 0;
+}
+
+.vw-filtros button {
+    display: block;
+    min-height: 34px;
+    padding: 4px 12px 4px 14px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.vw-filtros button:focus-visible {
+    outline: 2px solid var(--vw-accent-text);
+    outline-offset: 2px;
+}
+
+.vw-filtros li.vw-todas {
+    background: var(--vw-surface);
+    box-shadow: inset 0 0 0 1.5px var(--vw-line);
+}
+
+.vw-filtros li.vw-activo {
+    box-shadow: inset 5px 0 0 var(--tipo, var(--vw-text)), 0 0 0 2px var(--tipo, var(--vw-text));
+}
+
+.vw-filtros li.vw-todas.vw-activo {
+    box-shadow: inset 0 0 0 2px var(--vw-text);
+}
+
+.vw-filtros.vw-filtrando li:not(.vw-activo) {
+    opacity: 0.6;
+}
+
+@media (hover: hover) {
+    .vw-filtros li:not(.vw-activo):hover {
+        opacity: 1;
+        box-shadow: inset 5px 0 0 var(--tipo, var(--vw-text)), 0 0 0 1px var(--tipo, var(--vw-line));
+    }
+}
+
+.vw-filtrada {
+    display: none !important;
+}
+
+.week-calendar .vw-sin-filtro,
+.day-calendar .vw-sin-filtro {
+    padding: 10px 2px;
+    color: var(--vw-day-text, var(--vw-text-soft));
+    font-size: 13px;
+    list-style: none;
+    opacity: 0.8;
+}
