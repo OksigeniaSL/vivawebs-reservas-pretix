@@ -75,8 +75,7 @@ def cuenta_prueba(sender, request=None, **kwargs):
     ev = getattr(request, "event", None)
     if not cuenta or (ev is not None and not ev.testmode):
         return ""
-    return format_html('<p class="vw-prueba">Para reservar con bono sin comprarlo, entra con la cuenta de prueba: '
-                       'correo <strong>{}</strong>, contraseña <strong>{}</strong>. Tiene un bono de cada tipo.</p>',
+    return format_html('<p class="vw-prueba">Bonos de prueba: entra con <strong>{}</strong> y la contraseña <strong>{}</strong>.</p>',
                        cuenta.get("email", ""), cuenta.get("clave", ""))
 
 

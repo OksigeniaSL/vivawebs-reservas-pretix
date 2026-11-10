@@ -25,7 +25,7 @@
     --vw-event-bg: #F3EBDD;
     --vw-event-text: #1E2A44;
     --vw-event-text-soft: #4A5468;
-    --vw-tipos: "Reformer:#C8372F|Pilates suelo:#2B63C4|Yoga:#D4A20C|Espalda sana:#2A7F48|Clase de prueba:#E9B820";
+    --vw-tipos: "Reformer:#C8372F|Pilates suelo:#2B63C4|Yoga:#D4A20C|Espalda sana:#2A7F48";
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,8 +64,32 @@
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 10px 14px -12px rgba(255, 255, 255, 0.22);
 }
 
-/* The name of the studio, as on its website. */
+/* The name of the studio, as on its website, at the size of a heading: the diary first (Kimi, 9 November 2026). */
 .page-header h1 {
-    font-size: clamp(32px, 5vw, 52px);
-    letter-spacing: -0.04em;
+    font-size: clamp(26px, 3vw, 36px);
+    letter-spacing: -0.035em;
+}
+
+/* Kimi, third round: the head with the studio's own (its photo, and a line in the italic of the quotes of its website),
+   the demo account folded, and the Sunday says it is closed. piel.js reads these. Jujol, 10 November 2026. */
+:root {
+    --vw-cabecera-foto: "/img/estudio-s.webp";
+    --vw-cabecera-foto-alt: "La sala del reformer a primera hora, con las máquinas de tapizado marino y la luz de la mañana";
+    --vw-cabecera-lema: "Grupos de seis como mucho en el reformer, y la primera clase es de prueba: 10 €.";
+    --vw-lema-letra: 'Newsreader', Georgia, serif;
+    --vw-dia-vacio: "Cerrado";
+}
+
+.vw-lema {
+    color: var(--vw-text);
+    font-size: 19px;
+    font-style: italic;
+}
+
+/* On a phone, the line of the studio smaller, so the week shows in the first screen. */
+@media (max-width: 767px) {
+    .vw-lema {
+        font-size: 16px;
+        line-height: 1.35;
+    }
 }

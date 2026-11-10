@@ -74,3 +74,26 @@ h2,
 .price {
     font-variant-numeric: tabular-nums;
 }
+
+/* Kimi, third and fourth rounds: the slots as court cards, touched whole, and the skin of the club: its photo and its
+   name at the top, with what a court costs said once (not on every slot); the days in the blue of the court with the
+   lime of its lines, today in the yellow of the ball. piel.js reads these. Jujol, 10 November 2026. */
+:root {
+    --vw-forma: "pistas";
+    --vw-libre-nombre: "pista|pistas";
+    --vw-cabecera-foto: "/img/club-dia-l.webp";
+    --vw-cabecera-foto-alt: "";
+    --vw-cabecera-lema: "Seis pistas, de 8:00 a 23:00 · hora y media desde 18 € la pista, con la luz";
+    --vw-pista: #1F5FA8;
+    --vw-pista-texto: #FFFFFF;
+    --vw-pista-linea: #C9D63A;
+    --vw-hoy: #E3F04B;
+    --vw-hoy-texto: #070B14;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-pista: #1B4E8A;
+        --vw-pista-linea: #E3F04B;
+    }
+}

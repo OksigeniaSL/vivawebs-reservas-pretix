@@ -446,7 +446,7 @@ def configurar(d: dict) -> dict:
             if valor:
                 s.set(clave, ES(valor))
         portada = d.get("portada") or PORTADA[tipo]   # a business's own words for its booking page
-        if tipo == "clases" and d.get("bonos"):
+        if tipo == "clases" and d.get("bonos") and not d.get("portada"):   # its own words already say it
             portada += " ¿Tienes bono? Elige la opción «con bono» de tu clase y entra con tu cuenta."
         s.frontpage_text = ES(portada)
         s.payment_manual__enabled = True

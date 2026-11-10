@@ -931,3 +931,712 @@ a.btn[href*="/pay/change"] {
         transition: none;
     }
 }
+
+/* ======================================================================= for a ten (Kimi, 9 November 2026) */
+/* What is free stands out by its mass: a free session is a card of its own surface, its kind on the side, its time
+   first and «Reservar» as a button in the accent; closed, past, full or on a waiting list, only its outline, dashed,
+   and its state written, never only in colour. */
+.table-calendar a.event,
+.week-calendar a.event,
+.day-calendar a.event {
+    border-width: 1.5px;
+}
+
+.table-calendar a.event .event-time,
+.week-calendar a.event .event-time,
+.day-calendar a.event .event-time {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.week-calendar a.event .event-time .fa,
+.table-calendar a.event .event-time .fa,
+.day-calendar a.event .event-time .fa,
+.week-calendar a.event.available .event-status .fa,
+.table-calendar a.event.available .event-status .fa,
+.day-calendar a.event.available .event-status .fa {
+    display: none;
+}
+
+.table-calendar a.event.available,
+.week-calendar a.event.available,
+.day-calendar a.event.available {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 8px 16px -12px rgba(0, 0, 0, 0.45);
+}
+
+.table-calendar a.event.available .event-status,
+.week-calendar a.event.available .event-status,
+.day-calendar a.event.available .event-status {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 6px;
+    padding: 2px 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--vw-accent);
+    color: var(--vw-on-accent);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-calendar a.event.available:hover,
+.week-calendar a.event.available:hover,
+.day-calendar a.event.available:hover {
+    outline: 2px solid var(--vw-accent-text);
+    outline-offset: 1px;
+    transform: translateY(-1px);
+}
+
+.table-calendar a.event.over,
+.table-calendar a.event.continued,
+.week-calendar a.event.over,
+.week-calendar a.event.continued,
+.day-calendar a.event.over,
+.day-calendar a.event.continued,
+.week-calendar a.event.soldout,
+.day-calendar a.event.soldout,
+.table-calendar a.event.soldout {
+    --status-bg-color: transparent;
+    --status-text-color: var(--vw-day-text, var(--vw-text-soft));
+    --status-border-color: color-mix(in srgb, var(--vw-day-text, var(--vw-text)) 26%, transparent);
+    border-style: dashed;
+    box-shadow: none;
+    opacity: 0.78;
+}
+
+.table-calendar a.event.over::before,
+.table-calendar a.event.continued::before,
+.week-calendar a.event.over::before,
+.week-calendar a.event.continued::before,
+.day-calendar a.event.over::before,
+.day-calendar a.event.continued::before,
+.week-calendar a.event.soldout::before,
+.day-calendar a.event.soldout::before,
+.table-calendar a.event.soldout::before {
+    opacity: 0.35;
+}
+
+.table-calendar a.event.over > *,
+.week-calendar a.event.over > *,
+.day-calendar a.event.over > *,
+.week-calendar a.event.soldout > *,
+.day-calendar a.event.soldout > * {
+    color: var(--vw-day-text, var(--vw-text-soft));
+    font-weight: 500;
+}
+
+.week-calendar a.event.over .event-time,
+.day-calendar a.event.over .event-time,
+.week-calendar a.event.soldout .event-time,
+.day-calendar a.event.soldout .event-time {
+    font-weight: 600;
+}
+
+.week-calendar a.event.waitinglist .event-status,
+.day-calendar a.event.waitinglist .event-status,
+.table-calendar a.event.waitinglist .event-status {
+    font-weight: 650;
+}
+
+/* ------------------------------------------------- the head, short: the diary in the first screen */
+.page-header {
+    margin: 10px 0 14px;
+    padding-bottom: 10px;
+}
+
+.page-header h1 {
+    font-size: clamp(24px, 2.6vw, 32px);
+}
+
+/* The example notice, in one line: its two sentences one after the other. */
+.alert-warning,
+.alert-testmode {
+    margin-bottom: 14px;
+    padding: 8px 12px 8px 40px;
+    font-size: 13.5px;
+    line-height: 1.45;
+}
+
+.alert-warning::before,
+.alert-testmode::before {
+    top: 9px;
+    left: 12px;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+}
+
+.alert-warning p,
+.alert-testmode p {
+    display: inline;
+}
+
+.alert-warning p + p::before,
+.alert-testmode p + p::before {
+    content: " ";
+}
+
+/* The diary's panel, without the band of its title: «Elige la fecha» says itself. */
+.panel-default > .panel-heading,
+.panel-heading {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* --------------------------------------------- the week: one control, the arrows at its sides */
+.calendar-nav {
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+
+.calendar-nav > li,
+.calendar-nav > li:first-child,
+.calendar-nav > li:last-child {
+    width: auto;
+    flex: 0 0 auto;
+    padding: 0;
+}
+
+.calendar-nav > li.text-center {
+    flex: 0 1 380px;
+    min-width: 0;
+}
+
+.calendar-nav > li:first-child .btn,
+.calendar-nav > li:last-child .btn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0;
+}
+
+/* The arrows say «previous» and «next» to the ear (their aria-label); the eye needs only the arrow. */
+.calendar-nav > li:first-child .btn span:not(.fa),
+.calendar-nav > li:last-child .btn span:not(.fa) {
+    display: none;
+}
+
+#monthselform fieldset > div:first-of-type {
+    margin-bottom: 4px;
+    color: var(--vw-text-soft);
+    font-size: 12.5px;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+#monthselform .input-group {
+    display: flex;
+    width: 100%;
+}
+
+#monthselform select.form-control {
+    min-width: 0;
+    height: 44px;
+    font-size: 15px;
+}
+
+/* With the script, the week changes when it is chosen: its own button goes. */
+.vw-js #monthselform .input-group-btn {
+    display: none;
+}
+
+.vw-js #monthselform select.form-control {
+    border-radius: calc(var(--vw-radius) * 0.7) !important;
+}
+
+@media (max-width: 767px) {
+    .alert-warning p + p,
+    .alert-testmode p + p {
+        display: none;
+    }
+
+    .vw-prueba {
+        padding: 6px 12px;
+        font-size: 12.5px;
+        line-height: 1.4;
+    }
+
+    /* The sessions of the first day before its first free one, folded by piel.js into one line that shows them. */
+    .vw-anteriores {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 0 0 6px;
+        padding: 6px 10px;
+        border: 1.5px dashed color-mix(in srgb, var(--vw-day-text, var(--vw-text)) 26%, transparent);
+        border-radius: calc(var(--vw-radius) * 0.6);
+        color: var(--vw-day-text, var(--vw-text-soft));
+        font-size: 13px;
+    }
+
+    .vw-anteriores button {
+        min-height: 36px;
+        padding: 0 10px;
+        border: 0;
+        background: none;
+        color: inherit;
+        font-weight: 650;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    /* The days already past, closed by piel.js: their name only, in one line. */
+    .week-calendar details.weekday:not([open]) {
+        padding-bottom: 0;
+    }
+
+    .page-header {
+        margin-top: 6px;
+    }
+}
+
+/* ============================================ each business, its own (Kimi, third round, 10 November 2026) */
+/* piel.js reads the business's values in its vw/marca.css (--vw-forma, --vw-cabecera-*, --vw-precio-sesion,
+   --vw-dia-vacio). Nothing here needs more than Chrome 93 and Firefox 98. */
+
+/* The head with the place: the name and a line of its own on the left, the photo of the place on the right. */
+.page-header.vw-cabecera-propia {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 300px);
+    align-items: center;
+    gap: 14px 28px;
+}
+
+.vw-cabecera-propia .vw-cabecera-texto {
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.vw-cabecera-propia .pull-left {
+    float: none;
+}
+
+.vw-cabecera-propia > .clearfix {
+    display: none;
+}
+
+.vw-lema {
+    margin: 0;
+    color: var(--vw-text-soft);
+    font-family: var(--vw-lema-letra, var(--vw-body, inherit));
+    font-size: 17px;
+    line-height: 1.45;
+}
+
+.vw-cabecera-foto {
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--vw-radius);
+    background: var(--vw-surface-2);
+    aspect-ratio: 16 / 10;
+}
+
+.vw-cabecera-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .page-header.vw-cabecera-propia {
+        grid-template-columns: minmax(0, 1fr) 104px;
+        align-items: start;
+        gap: 10px 14px;
+    }
+
+    .vw-cabecera-foto {
+        aspect-ratio: 1;
+    }
+
+    .vw-lema {
+        font-size: 15px;
+    }
+}
+
+/* The demo account, folded: a quiet question under the head that opens the address and the password. */
+.vw-prueba-plegada {
+    margin: 2px 0 0;
+    font-size: 14px;
+}
+
+.vw-prueba-plegada summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    color: var(--vw-accent-text);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.vw-prueba-plegada summary::-webkit-details-marker {
+    display: none;
+}
+
+.vw-prueba-plegada summary::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
+}
+
+.vw-prueba-plegada[open] summary::before {
+    transform: rotate(45deg);
+}
+
+.vw-prueba-plegada .vw-prueba {
+    margin: 2px 0 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--vw-line);
+    border-radius: calc(var(--vw-radius) * 0.7);
+    font-size: 14px;
+    text-align: start;
+}
+
+/* A day without sessions says so; a day whose sessions are all closed, in one line that shows them. */
+.week-calendar .vw-dia-vacio {
+    padding: 12px 2px;
+    color: var(--vw-day-text, var(--vw-text-soft));
+    font-size: 13.5px;
+    list-style: none;
+    opacity: 0.8;
+}
+
+.week-calendar .vw-cerradas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px 8px;
+    margin: 0 0 6px;
+    padding: 6px 10px;
+    border: 1.5px dashed color-mix(in srgb, var(--vw-day-text, var(--vw-text)) 26%, transparent);
+    border-radius: calc(var(--vw-radius) * 0.6);
+    color: var(--vw-day-text, var(--vw-text-soft));
+    font-size: 13px;
+    list-style: none;
+}
+
+.week-calendar .vw-cerradas button {
+    min-height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* «pistas»: each free slot a card touched whole, its hour first, its price and an arrow; no button in each one. The
+   filled accent is kept for confirming. Its state is still said to the ear; closed and full ones keep it written. */
+.vw-forma-pistas .week-calendar a.event.available,
+.vw-forma-pistas .day-calendar a.event.available,
+.vw-forma-pistas .table-calendar a.event.available {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2px 8px;
+    padding: 9px 10px 9px 14px;
+    border-color: var(--vw-line);
+}
+
+.vw-forma-pistas a.event.available .event-time {
+    grid-column: 1 / -1;
+    font-size: 15px;
+}
+
+.vw-forma-pistas a.event.available .vw-precio {
+    color: var(--vw-event-text-soft, var(--vw-text-soft));
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.vw-forma-pistas a.event.available .event-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.vw-forma-pistas a.event.available::after {
+    content: '';
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+    border: solid var(--vw-accent-text);
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg);
+}
+
+.vw-forma-pistas a.event.available:not(:has(.vw-precio))::after {
+    grid-row: 1;
+}
+
+@media (hover: hover) {
+    .vw-forma-pistas a.event.available:hover {
+        border-color: var(--vw-accent-text);
+        outline: 0;
+        transform: none;
+        box-shadow: 0 0 0 1px var(--vw-accent-text), 0 10px 18px -12px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* =========================================== the calendar in the first screen (Kimi, fourth round, 10 Nov 2026) */
+/* The example notice, a thin line: its first sentence, small, with its sign, and no box; the rest stays for the ear. */
+.alert-warning,
+.alert-testmode {
+    margin: 0 0 10px;
+    padding: 4px 0 4px 28px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--vw-text-soft);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.alert-warning::before,
+.alert-testmode::before {
+    top: 4px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+}
+
+.alert-warning p + p,
+.alert-testmode p + p {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.alert-warning strong,
+.alert-testmode strong {
+    font-weight: 600;
+}
+
+/* «pistas»: the skin of a club. Its head is a band with the photo of the club and its name over it; the days in the
+   colour of the court with its line, today in the colour of the ball; each free slot with the court's edge. The colours
+   come from the business (--vw-pista, --vw-pista-texto, --vw-pista-linea, --vw-hoy, --vw-hoy-texto). */
+.vw-forma-pistas .page-header.vw-cabecera-propia {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    min-height: clamp(150px, 22vw, 230px);
+    margin: 10px 0 14px;
+    padding: clamp(16px, 2.6vw, 28px);
+    overflow: hidden;
+    border: 0;
+    border-radius: var(--vw-radius);
+    background: var(--vw-pista, var(--vw-accent));
+    color: #FFFFFF;
+}
+
+.vw-forma-pistas .vw-cabecera-propia .vw-cabecera-foto {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: 0;
+    aspect-ratio: auto;
+}
+
+.vw-forma-pistas .vw-cabecera-propia .vw-cabecera-foto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(7, 11, 20, 0.86), rgba(7, 11, 20, 0.35) 55%, rgba(7, 11, 20, 0.1));
+}
+
+.vw-forma-pistas .vw-cabecera-propia .vw-cabecera-texto {
+    position: relative;
+    z-index: 1;
+}
+
+.vw-forma-pistas .vw-cabecera-propia h1,
+.vw-forma-pistas .vw-cabecera-propia h1 a {
+    color: #FFFFFF;
+}
+
+.vw-forma-pistas .vw-lema {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+}
+
+.vw-forma-pistas .week-calendar .weekday h3,
+.vw-forma-pistas .day-calendar h3 {
+    margin: 0 -8px 8px;
+    padding: 9px 10px 7px;
+    border-bottom: 3px solid var(--vw-pista-linea, var(--vw-line));
+    border-radius: calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0 0;
+    background: var(--vw-pista, var(--vw-accent));
+    color: var(--vw-pista-texto, var(--vw-on-accent));
+}
+
+.vw-forma-pistas .week-calendar .weekday.today h3 {
+    background: var(--vw-hoy, var(--vw-pista, var(--vw-accent)));
+    color: var(--vw-hoy-texto, var(--vw-pista-texto, var(--vw-on-accent)));
+}
+
+.vw-forma-pistas .week-calendar a.event.available::before,
+.vw-forma-pistas .day-calendar a.event.available::before {
+    background: var(--vw-pista, var(--vw-accent));
+}
+
+@media (max-width: 767px) {
+    .vw-forma-pistas .week-calendar .weekday h3 {
+        margin: 0;
+        border-radius: calc(var(--vw-radius) * 0.7);
+    }
+
+    .vw-forma-pistas .week-calendar details[open] .weekday-summary h3,
+    .vw-forma-pistas .week-calendar details[open] > summary h3 {
+        border-radius: calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0 0;
+    }
+}
+
+/* Without a price on each slot, its hour and its arrow on one line. */
+.vw-forma-pistas a.event.available:not(:has(.vw-precio)) .event-time {
+    grid-column: 1;
+}
+
+/* On a wide screen the columns are narrow: the hour whole, and the card itself says it is touched (its edge, its
+   shadow, its hover); the arrow stays on a phone. */
+@media (min-width: 768px) {
+    .vw-forma-pistas a.event.available:not(:has(.vw-precio))::after {
+        display: none;
+    }
+
+    .vw-forma-pistas a.event.available .event-time {
+        white-space: nowrap;
+    }
+}
+
+/* On a phone, the calendar in the first screen: the title of its panel («Elige la fecha para reservar») says what the
+   week already says, so it stays for the ear only. */
+@media (max-width: 767px) {
+    .panel:has(.week-calendar, .table-calendar, .day-calendar) > .panel-heading {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+
+    .page-header:not(.vw-cabecera-propia) .vw-cabecera-foto,
+    :root:not(.vw-forma-pistas) .vw-cabecera-foto {
+        max-height: 96px;
+    }
+
+    .vw-forma-pistas .page-header.vw-cabecera-propia {
+        min-height: 150px;
+    }
+}
+
+/* ============================================ a layer of quick reading (Kimi, fifth round, 10 November 2026) */
+/* What each colour means, in one line above the calendar (piel.js writes it from --vw-tipos). */
+.vw-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0 0 12px;
+    padding: 0;
+    color: var(--vw-text-soft);
+    font-size: 13.5px;
+    list-style: none;
+}
+
+.vw-leyenda li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.vw-leyenda li::before {
+    content: '';
+    width: 18px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--tipo);
+}
+
+/* «Verlas», a button that is seen, not a word stuck to the line. */
+.week-calendar .vw-cerradas button,
+.vw-anteriores button {
+    min-height: 32px;
+    padding: 0 12px;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+/* The title of the calendar's panel, lighter than the control it presents: no grey band, no capitals. */
+.panel-default > .panel-heading,
+.panel-heading {
+    padding-inline: 0;
+    border-bottom: 0;
+    background: transparent;
+}
+
+.panel-title,
+.panel-title strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+/* The club's band: the photo veiled more under the name, so the white title does not fight with the court lights. */
+.vw-forma-pistas .vw-cabecera-propia .vw-cabecera-foto::after {
+    background: linear-gradient(to top, rgba(7, 11, 20, 0.92), rgba(7, 11, 20, 0.55) 60%, rgba(7, 11, 20, 0.25));
+}
+
+/* What is left in each free session (piel.js, from pretix_vivawebs): small, under the hour; when it is two or fewer, in
+   bold, the warm note of the business. */
+.vw-libres {
+    display: block;
+    color: var(--vw-event-text-soft, var(--vw-text-soft));
+    font-size: 12.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.vw-libres.vw-pocas {
+    color: var(--vw-event-text, var(--vw-text));
+    font-weight: 800;
+}
+
+.vw-forma-pistas a.event.available .vw-libres {
+    grid-column: 1;
+}

@@ -148,3 +148,59 @@ def libres(request):
     r["Cache-Control"] = "public, max-age=60"
     r["X-Robots-Tag"] = "noindex"
     return r
+
+
+_SEMANA = re.compile(r"^(\d{4})-W(\d{2})$")
+
+
+def semana(request):
+    """/reservas/vw-semana?semana=AAAA-Wnn: for each session of that week (by its id, the one in /<evento>/<id>/),
+    how many services are free (courts, rooms) and how many places are left at most (classes; null when unlimited).
+    For the booking skin to write «quedan 2» or «4 pistas libres» on each card. Without ?semana, this week. Cached a
+    minute: it asks every quota of the week."""
+    from django.core.cache import cache
+    ev = _evento()
+    if not ev or not ev.has_subevents:
+        raise Http404()
+    with scopes_disabled():
+        tz = ZoneInfo(ev.settings.timezone)
+        m = _SEMANA.match(request.GET.get("semana", ""))
+        try:
+            lunes = date.fromisocalendar(int(m.group(1)), int(m.group(2)), 1) if m else \
+                datetime.now(tz).date() - timedelta(days=datetime.now(tz).weekday())
+        except ValueError:
+            raise Http404()
+        clave = f"vw-semana:{ev.pk}:{lunes.isoformat()}"
+        datos = cache.get(clave)
+        if datos is None:
+            ini = datetime.combine(lunes, datetime.min.time(), tz)
+            from collections import defaultdict
+            from pretix.base.models import Quota
+            from pretix.base.services.quotas import QuotaAvailability
+            sesiones = list(ev.subevents.filter(active=True, date_from__gte=ini, date_from__lt=ini + timedelta(days=7)))
+            # Every quota of the week in one go (asking item by item took seconds).
+            quotas = list(Quota.objects.filter(event=ev, subevent__in=sesiones).prefetch_related("items"))
+            qa = QuotaAvailability(full_results=False)
+            qa.queue(*quotas)
+            qa.compute()
+            por_sesion = defaultdict(lambda: defaultdict(list))   # session → item → [(state, places left)]
+            for q in quotas:
+                for it in q.items.all():
+                    if it.active:
+                        por_sesion[q.subevent_id][it.pk].append(qa.results[q])
+            ahora = datetime.now(tz)
+            datos = {}
+            for se in sesiones:
+                libres, plazas = 0, 0
+                for resultados in por_sesion[se.pk].values():
+                    if se.date_from > ahora and all(estado == Quota.AVAILABILITY_OK for estado, _ in resultados):
+                        libres += 1
+                        nums = [n for _, n in resultados if n is not None]
+                        n = min(nums) if nums else None
+                        plazas = None if (n is None or plazas is None) else max(plazas, n)
+                datos[str(se.pk)] = {"libres": libres, "plazas": plazas if libres else 0}
+            cache.set(clave, datos, 60)
+    r = JsonResponse({"semana": lunes.isoformat(), "sesiones": datos}, json_dumps_params={"ensure_ascii": False})
+    r["Cache-Control"] = "public, max-age=60"
+    r["X-Robots-Tag"] = "noindex"
+    return r
