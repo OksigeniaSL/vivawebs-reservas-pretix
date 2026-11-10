@@ -18,8 +18,8 @@
     --vw-warn: #E9B820;
     --vw-on-warn: #1E2A44;
     --vw-radius: 10px;
-    --vw-band-bg: #1E2A44;
-    --vw-band-text: #ECEEF0;
+    --vw-band-bg: #FFFFFF;
+    --vw-band-text: #1E2A44;
     --vw-day-bg: #E2E6EC;
     --vw-day-text: #1E2A44;
     --vw-event-bg: #FFFFFF;
@@ -100,7 +100,7 @@
 /* Kimi, third round: the head with the studio's own (its photo, and a line in the italic of the quotes of its website),
    the demo account folded, and the Sunday says it is closed. piel.js reads these. Jujol, 10 November 2026. */
 :root {
-    --vw-cabecera-foto: "/img/estudio-s.webp";
+    --vw-cabecera-foto: "/img/estudio-l.webp";
     --vw-cabecera-foto-alt: "La sala del reformer a primera hora, con las máquinas de tapizado marino y la luz de la mañana";
     --vw-cabecera-lema: "Grupos de seis como mucho en el reformer, y la primera clase es de prueba: 10 €.";
     --vw-lema-letra: 'Newsreader', Georgia, serif;
@@ -118,5 +118,70 @@
     .vw-lema {
         font-size: 16px;
         line-height: 1.35;
+    }
+}
+
+/* Eighth round (Kimi, 10 November 2026): «too much navy». The band on top is light; each day's head is the aluminium
+   of the column with its name in navy over a navy rule (today, the yellow one); the intense navy is left for «Reservar
+   ahora» alone. The photo of the studio, half the head and as tall as its words; on a phone, across the top. */
+.week-calendar .weekday h3 {
+    border-bottom: 2px solid #1E2A44;
+    border-radius: 0;
+    background: transparent;
+    color: #1E2A44;
+}
+
+.week-calendar .weekday.today h3 {
+    border-bottom-color: #E9B820;
+    box-shadow: inset 0 -2px 0 #E9B820;
+}
+
+.page-header.vw-cabecera-propia {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 14px 32px;
+}
+
+.page-header.vw-cabecera-propia .vw-cabecera-texto {
+    align-self: center;
+}
+
+:root .page-header.vw-cabecera-propia .vw-cabecera-foto {
+    min-height: 220px;
+    aspect-ratio: 16 / 9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-band-bg: #131A2C;
+        --vw-band-text: #ECEEF0;
+    }
+
+    .week-calendar .weekday h3 {
+        border-bottom-color: #7FA6F0;
+        background: transparent;
+        color: #ECEEF0;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-header.vw-cabecera-propia {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    :root .page-header.vw-cabecera-propia .vw-cabecera-foto {
+        grid-row: 1;
+        min-height: 0;
+        max-height: none;
+        aspect-ratio: 16 / 9;
+    }
+
+    .week-calendar .weekday h3 {
+        border-radius: 0;
+    }
+
+    .week-calendar details[open] .weekday-summary h3,
+    .week-calendar details[open] > summary h3 {
+        border-radius: 0;
     }
 }

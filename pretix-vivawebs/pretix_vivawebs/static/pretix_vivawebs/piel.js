@@ -44,7 +44,7 @@
         if (!first || first.querySelector('.vw-anteriores')) {
             return;
         }
-        var items = Array.prototype.slice.call(first.querySelectorAll('ul.events > li'));
+        var items = Array.prototype.slice.call(first.querySelectorAll('ul.events > li:not(.vw-tramo)'));
         var before = [];
         for (var k = 0; k < items.length && !items[k].querySelector('a.event.available'); k++) {
             before.push(items[k]);
@@ -408,4 +408,45 @@
             }
         })
         .catch(function () { /* without the data, the calendar as it is */ });
+}());
+
+/* Courts: the day in three stretches, morning, afternoon and night, so ten equal slots are not one wall (Kimi, eighth
+ * round). A line with the stretch's name before its first slot, for the eye only; days already folded are left alone. */
+(function () {
+    'use strict';
+    if (!document.documentElement.classList.contains('vw-forma-pistas')) {
+        return;
+    }
+    var lang = (document.documentElement.lang || 'es').slice(0, 2);
+    var NAMES = {es: ['Mañana', 'Tarde', 'Noche'], en: ['Morning', 'Afternoon', 'Evening'], de: ['Morgen', 'Nachmittag', 'Abend']};
+    var names = NAMES[lang] || NAMES.es;
+    Array.prototype.forEach.call(document.querySelectorAll('.week-calendar ul.events, .day-calendar ul.events'), function (list) {
+        if (list.querySelector('.vw-tramo, .vw-cerradas, .vw-dia-vacio')) {
+            return;
+        }
+        var last = -1;
+        var marks = [];
+        Array.prototype.forEach.call(list.children, function (li) {
+            var t = li.querySelector('.event-time time');
+            var h = t ? parseInt(t.getAttribute('datetime'), 10) : NaN;
+            if (isNaN(h)) {
+                return;
+            }
+            var k = h < 14 ? 0 : (h < 20 ? 1 : 2);
+            if (k !== last) {
+                marks.push([li, k]);
+                last = k;
+            }
+        });
+        if (marks.length < 2) {
+            return;
+        }
+        marks.forEach(function (m) {
+            var sep = document.createElement('li');
+            sep.className = 'vw-tramo';
+            sep.setAttribute('aria-hidden', 'true');
+            sep.textContent = names[m[1]];
+            list.insertBefore(sep, m[0]);
+        });
+    });
 }());

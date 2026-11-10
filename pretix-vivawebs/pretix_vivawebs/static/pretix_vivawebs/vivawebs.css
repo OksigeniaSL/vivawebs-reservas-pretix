@@ -1724,3 +1724,170 @@ a.btn[href*="/pay/change"] {
 .vw-forma-pistas a.event.available .event-time {
     grid-column: 1 / -1;
 }
+
+/* ===================================================================== eighth round (Kimi, 10 November 2026) */
+/* The week, one control: the earlier and later weeks joined to the list as its two ends, «← week →». With no earlier
+   week its arrow is there but spent, so the piece keeps its shape. */
+.calendar-nav {
+    align-items: flex-end;
+    gap: 0;
+}
+
+.calendar-nav > li:first-child .btn {
+    border-right: 0;
+    border-radius: calc(var(--vw-radius) * 0.7) 0 0 calc(var(--vw-radius) * 0.7) !important;
+}
+
+.calendar-nav > li:last-child .btn {
+    border-left: 0;
+    border-radius: 0 calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0 !important;
+}
+
+.vw-js #monthselform select.form-control {
+    border-radius: 0 !important;
+}
+
+.calendar-nav > li:first-child:not(:has(a))::before,
+.calendar-nav > li:last-child:not(:has(a))::before {
+    content: '←';
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--vw-line);
+    border-right: 0;
+    border-radius: calc(var(--vw-radius) * 0.7) 0 0 calc(var(--vw-radius) * 0.7);
+    color: var(--vw-text-soft);
+    opacity: 0.45;
+}
+
+.calendar-nav > li:last-child:not(:has(a))::before {
+    content: '→';
+    border-right: 1px solid var(--vw-line);
+    border-left: 0;
+    border-radius: 0 calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0;
+}
+
+/* The waiting list is something to do, not something off: a solid edge and its state as an outlined button, beside
+   the filled «Reservar ahora» of a free one. */
+.week-calendar a.event.waitinglist,
+.day-calendar a.event.waitinglist {
+    border-style: solid;
+    background: color-mix(in srgb, var(--tipo, var(--vw-accent)) 6%, var(--vw-event-bg, var(--vw-surface)));
+}
+
+.week-calendar a.event.waitinglist .event-status,
+.day-calendar a.event.waitinglist .event-status {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 1px 9px;
+    border: 1.5px solid var(--vw-accent-text);
+    border-radius: 999px;
+    color: var(--vw-accent-text);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.week-calendar a.event.waitinglist .event-status .fa,
+.day-calendar a.event.waitinglist .event-status .fa {
+    display: none;
+}
+
+/* Courts: each free slot says it is booked here, with a small «Reservar» beside what is left (Kimi, round 8: without
+   it the slots read as information). The ear keeps pretix's whole words. */
+.vw-forma-pistas a.event.available .event-status {
+    position: static;
+    grid-column: 2;
+    grid-row: 2;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 2px 9px;
+    overflow: visible;
+    clip: auto;
+    border-radius: 999px;
+    background: var(--vw-accent);
+    color: var(--vw-on-accent);
+    font-size: 0;
+    line-height: 1.45;
+    white-space: nowrap;
+}
+
+.vw-forma-pistas a.event.available .event-status::after {
+    content: 'Reservar';
+    font-size: 12px;
+    font-weight: 650;
+}
+
+html[lang^="en"] .vw-forma-pistas a.event.available .event-status::after { content: 'Book'; }
+
+/* In the narrow columns of a wide screen, the button on its own line under what is left; on a phone, beside it. */
+@media (min-width: 768px) {
+    .vw-forma-pistas a.event.available .event-status {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        justify-self: start;
+        margin-top: 4px;
+    }
+}
+html[lang^="de"] .vw-forma-pistas a.event.available .event-status::after { content: 'Buchen'; }
+
+/* The lime, only as a small «hoy» on today: no line under every day, no whole day in lime. */
+.vw-forma-pistas .week-calendar .weekday h3,
+.vw-forma-pistas .day-calendar h3 {
+    border-bottom: 0;
+}
+
+.vw-forma-pistas .week-calendar .weekday.today h3 {
+    background: var(--vw-pista, var(--vw-accent));
+    color: var(--vw-pista-texto, var(--vw-on-accent));
+}
+
+.vw-forma-pistas .week-calendar .weekday.today h3::after {
+    content: 'hoy';
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--vw-hoy, #E3F04B);
+    color: var(--vw-hoy-texto, #070B14);
+    font-size: 11.5px;
+    font-weight: 700;
+    vertical-align: 1px;
+}
+
+html[lang^="en"] .vw-forma-pistas .week-calendar .weekday.today h3::after { content: 'today'; }
+html[lang^="de"] .vw-forma-pistas .week-calendar .weekday.today h3::after { content: 'heute'; }
+
+/* The club's line on its photo: a shade under the letters, so it reads over the lights of the terrace. */
+.vw-forma-pistas .vw-cabecera-propia h1,
+.vw-forma-pistas .vw-lema {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 0 18px rgba(0, 0, 0, 0.55);
+}
+
+/* The day of courts in three stretches: morning, afternoon and night (piel.js). */
+.week-calendar .vw-tramo,
+.day-calendar .vw-tramo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 4px;
+    color: var(--vw-day-text, var(--vw-text-soft));
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+.week-calendar .vw-tramo::after,
+.day-calendar .vw-tramo::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: color-mix(in srgb, var(--vw-day-text, var(--vw-text)) 22%, transparent);
+}
+
+.week-calendar ul.events > .vw-tramo:first-child,
+.day-calendar ul.events > .vw-tramo:first-child {
+    margin-top: 2px;
+}
