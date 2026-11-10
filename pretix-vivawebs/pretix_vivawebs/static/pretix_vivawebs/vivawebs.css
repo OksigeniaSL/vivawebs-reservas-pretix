@@ -1640,3 +1640,87 @@ a.btn[href*="/pay/change"] {
 .vw-forma-pistas a.event.available .vw-libres {
     grid-column: 1;
 }
+
+/* ===================================================================== sixth round (Kimi, 10 November 2026) */
+/* The legend, next to the cards and like them: each kind a small card of its own colour, so the eye goes from one to
+   the other without reading. */
+.vw-leyenda {
+    gap: 8px;
+    margin: 4px 0 14px;
+    color: var(--vw-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.vw-leyenda li {
+    padding: 4px 12px 4px 14px;
+    border-radius: calc(var(--vw-radius) * 0.5);
+    background: color-mix(in srgb, var(--tipo, var(--vw-ok)) 14%, var(--vw-event-bg, var(--vw-surface)));
+    box-shadow: inset 5px 0 0 var(--tipo, var(--vw-ok));
+}
+
+.vw-leyenda li::before {
+    display: none;
+}
+
+/* Courts: each free slot in the colour of how many are left (piel.js: vw-muchas, vw-algunas, vw-una), tinted and with
+   its edge, so the week reads at a glance; the full ones keep their dashed outline. The business may change the three
+   colours (--vw-libre-muchas, --vw-libre-algunas, --vw-libre-una, and their -texto for the words). */
+:root {
+    --vw-libre-muchas: #2E8A57;
+    --vw-libre-muchas-texto: #1F6B42;
+    --vw-libre-algunas: #E0A12E;
+    --vw-libre-algunas-texto: #8A5A0C;
+    --vw-libre-una: #D2453A;
+    --vw-libre-una-texto: #A82E25;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --vw-libre-muchas: #6FD08F;
+        --vw-libre-muchas-texto: #8FE0A9;
+        --vw-libre-algunas: #E8B65C;
+        --vw-libre-algunas-texto: #F0C77E;
+        --vw-libre-una: #FF8A7E;
+        --vw-libre-una-texto: #FFA79E;
+    }
+}
+
+.vw-muchas { --vw-estado: var(--vw-libre-muchas); --vw-estado-texto: var(--vw-libre-muchas-texto); }
+.vw-algunas { --vw-estado: var(--vw-libre-algunas); --vw-estado-texto: var(--vw-libre-algunas-texto); }
+.vw-una { --vw-estado: var(--vw-libre-una); --vw-estado-texto: var(--vw-libre-una-texto); }
+
+.vw-forma-pistas a.event.available:is(.vw-muchas, .vw-algunas, .vw-una) {
+    --status-bg-color: color-mix(in srgb, var(--vw-estado) 12%, var(--vw-event-bg, var(--vw-surface)));
+}
+
+.vw-forma-pistas .week-calendar a.event.available:is(.vw-muchas, .vw-algunas, .vw-una)::before,
+.vw-forma-pistas .day-calendar a.event.available:is(.vw-muchas, .vw-algunas, .vw-una)::before {
+    background: var(--vw-estado);
+}
+
+.vw-forma-pistas a.event.available:is(.vw-muchas, .vw-algunas, .vw-una) .vw-libres {
+    color: var(--vw-estado-texto);
+    font-weight: 700;
+}
+
+.vw-leyenda-libres li:is(.vw-muchas, .vw-algunas, .vw-una) {
+    --tipo: var(--vw-estado);
+}
+
+.vw-leyenda-libres li.vw-completo {
+    padding: 2.5px 12px;
+    border: 1.5px dashed color-mix(in srgb, var(--vw-text) 45%, transparent);
+    background: transparent;
+    box-shadow: none;
+    font-weight: 500;
+}
+
+/* The whole card is touched, on a phone too: no arrow on each slot. */
+.vw-forma-pistas a.event.available::after {
+    display: none;
+}
+
+.vw-forma-pistas a.event.available .event-time {
+    grid-column: 1 / -1;
+}

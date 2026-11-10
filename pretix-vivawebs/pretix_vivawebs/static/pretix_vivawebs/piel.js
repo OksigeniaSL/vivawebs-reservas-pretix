@@ -52,16 +52,25 @@
         if (before.length < 2) {
             return;
         }
+        // What they are, in words (Kimi, sixth round: «cerradas» could be gone or full): «3 ya pasadas», «2 completas»,
+        // «2 ya pasadas y 1 completa».
         var lang = (document.documentElement.lang || 'es').slice(0, 2);
-        var say = {es: [' anteriores, cerradas', 'Verlas'], en: [' earlier, closed', 'Show'], de: [' frühere, geschlossen', 'Zeigen']};
+        var say = {
+            es: {gone: ['ya pasada', 'ya pasadas'], full: ['completa', 'completas'], and: ' y ', show: 'Verlas'},
+            en: {gone: ['already gone', 'already gone'], full: ['full', 'full'], and: ' and ', show: 'Show'},
+            de: {gone: ['vorbei', 'vorbei'], full: ['ausgebucht', 'ausgebucht'], and: ' und ', show: 'Zeigen'}
+        };
         var words = say[lang] || say.es;
+        var gone = before.filter(function (li) { return li.querySelector('a.event.over'); }).length;
+        var full = before.length - gone;
+        var part = function (n, w) { return n ? n + ' ' + w[n === 1 ? 0 : 1] : ''; };
         var line = document.createElement('li');
         line.className = 'vw-anteriores';
         var text = document.createElement('span');
-        text.textContent = before.length + words[0];
+        text.textContent = [part(gone, words.gone), part(full, words.full)].filter(Boolean).join(words.and);
         var show = document.createElement('button');
         show.type = 'button';
-        show.textContent = words[1];
+        show.textContent = words.show;
         show.addEventListener('click', function () {
             before.forEach(function (li) {
                 li.hidden = false;
@@ -185,9 +194,9 @@
     };
     var lang = (document.documentElement.lang || 'es').slice(0, 2);
     var WORDS = {
-        es: {test: '¿Cómo pruebo los bonos?', empty: 'Sin sesiones', closed: [' cerrada', ' cerradas'], show: ['Verla', 'Verlas']},
-        en: {test: 'How do I try the passes?', empty: 'No sessions', closed: [' closed', ' closed'], show: ['Show', 'Show']},
-        de: {test: 'Wie teste ich die Karten?', empty: 'Keine Termine', closed: [' geschlossen', ' geschlossen'],
+        es: {test: '¿Cómo pruebo los bonos?', empty: 'Sin sesiones', closed: [' ya pasada', ' ya pasadas'], show: ['Verla', 'Verlas']},
+        en: {test: 'How do I try the passes?', empty: 'No sessions', closed: [' already gone', ' already gone'], show: ['Show', 'Show']},
+        de: {test: 'Wie teste ich die Karten?', empty: 'Keine Termine', closed: [' vorbei', ' vorbei'],
             show: ['Zeigen', 'Zeigen']}
     };
     var T = WORDS[lang] || WORDS.es;
@@ -320,9 +329,13 @@
     };
     var WORDS = {
         es: {free: function (n) { return named(n) + (n === 1 ? 'libre' : 'libres'); },
-            left: function (n) { return n === 1 ? 'queda 1' : 'quedan ' + n; }},
-        en: {free: function (n) { return n + ' free'; }, left: function (n) { return n + ' left'; }},
-        de: {free: function (n) { return n + ' frei'; }, left: function (n) { return 'noch ' + n; }}
+            left: function (n) { return n === 1 ? 'queda 1' : 'quedan ' + n; },
+            more: ' o más', range: function (a, b) { return b === a + 1 ? a + ' o ' + b : a + ' a ' + b; },
+            full: 'Completo', legend: 'Lo que queda libre'},
+        en: {free: function (n) { return n + ' free'; }, left: function (n) { return n + ' left'; },
+            more: ' or more', range: function (a, b) { return a + '–' + b; }, full: 'Full', legend: 'What is free'},
+        de: {free: function (n) { return n + ' frei'; }, left: function (n) { return 'noch ' + n; },
+            more: ' oder mehr', range: function (a, b) { return a + '–' + b; }, full: 'Ausgebucht', legend: 'Was frei ist'}
     };
     var T = WORDS[lang] || WORDS.es;
     var week = (window.location.search.match(/[?&]date=(\d{4}-W\d{2})/) || [])[1];
@@ -336,6 +349,20 @@
         })
         .then(function (data) {
             var sessions = (data && data.sessions) || (data && data.sesiones) || {};
+            // On courts, each free slot takes the colour of how many are left (Kimi, sixth round: «todo es azul»): more
+            // than half of the most free in the week, two up to half, the last one. The full ones keep their dashed edge.
+            var most = 0;
+            if (courts) {
+                Object.keys(sessions).forEach(function (k) {
+                    if (typeof sessions[k].libres === 'number' && sessions[k].libres > most) {
+                        most = sessions[k].libres;
+                    }
+                });
+            }
+            var high = Math.floor(most / 2) + 1;
+            var level = function (n) {
+                return n === 1 ? 'vw-una' : (n >= high ? 'vw-muchas' : 'vw-algunas');
+            };
             Array.prototype.forEach.call(events, function (ev) {
                 var id = ((ev.getAttribute('href') || '').match(/\/(\d+)\/?(?:\?|$)/) || [])[1];
                 var s = id && sessions[id];
@@ -351,7 +378,34 @@
                 tag.textContent = courts ? T.free(n) : T.left(n);
                 var status = ev.querySelector('.event-status');
                 ev.insertBefore(tag, status);
+                if (courts && most > 2) {
+                    ev.classList.add(level(n));
+                }
             });
+            // What the colours say, in the line where classes have their kinds.
+            if (courts && most > 2 && !document.querySelector('.vw-leyenda')) {
+                var mid = high - 1;
+                var items = [
+                    ['vw-muchas', T.free(high).replace(/^\d+/, high + (high < most ? T.more : ''))],
+                    mid >= 2 ? ['vw-algunas', T.free(mid).replace(/^\d+/, mid > 2 ? T.range(2, mid) : '2')] : null,
+                    ['vw-una', T.free(1)],
+                    ['vw-completo', T.full]
+                ];
+                var legend = document.createElement('ul');
+                legend.className = 'vw-leyenda vw-leyenda-libres';
+                legend.setAttribute('aria-label', T.legend);
+                items.filter(Boolean).forEach(function (it) {
+                    var li = document.createElement('li');
+                    li.className = it[0];
+                    li.textContent = it[1];
+                    legend.appendChild(li);
+                });
+                var cal = document.querySelector('.week-calendar, .table-calendar, .day-calendar');
+                var nav = document.querySelector('.calendar-nav');
+                if (cal) {
+                    (nav || cal).parentNode.insertBefore(legend, nav ? nav.nextSibling : cal);
+                }
+            }
         })
         .catch(function () { /* without the data, the calendar as it is */ });
 }());

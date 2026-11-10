@@ -20,9 +20,9 @@
     --vw-radius: 10px;
     --vw-band-bg: #1E2A44;
     --vw-band-text: #ECEEF0;
-    --vw-day-bg: #1E2A44;
-    --vw-day-text: #ECEEF0;
-    --vw-event-bg: #F3EBDD;
+    --vw-day-bg: #E2E6EC;
+    --vw-day-text: #1E2A44;
+    --vw-event-bg: #FFFFFF;
     --vw-event-text: #1E2A44;
     --vw-event-text-soft: #4A5468;
     --vw-tipos: "Reformer:#C8372F|Pilates suelo:#2B63C4|Yoga:#D4A20C|Espalda sana:#2A7F48";
@@ -45,23 +45,50 @@
         --vw-on-warn: #1E2A44;
         --vw-band-bg: #131A2C;
         --vw-band-text: #ECEEF0;
-        --vw-day-bg: #283860;
+        --vw-day-bg: #131A2C;
         --vw-day-text: #ECEEF0;
-        --vw-event-bg: #3A4C74;
+        --vw-event-bg: #1B2338;
         --vw-event-text: #ECEEF0;
         --vw-event-text-soft: #C9CFDA;
     }
 }
 
-/* A day with classes is a mat: its grip texture, from the website's own image. Days without classes stay floor. */
-.table-calendar td.day.has-events,
-.table-calendar td.day.has-events:nth-child(even),
-.week-calendar .weekday:has(.event),
-.week-calendar .weekday:nth-child(even):has(.event) {
-    background-image: url("/img/esterilla.webp?v=20261108a");
-    background-size: 96px 96px;
-    background-blend-mode: soft-light;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 10px 14px -12px rgba(255, 255, 255, 0.22);
+/* Kimi, sixth round: the navy columns with the mat's dots weighed and «smelt of back office». The days are light now,
+   the aluminium of the rails; the intense navy stays for the head of each day and the buttons, and each class is a white
+   card tinted with the colour of its kind, like the legend over them. */
+.week-calendar .weekday h3 {
+    margin: 0 -8px 8px;
+    padding: 10px 10px 8px;
+    border-bottom: 0;
+    border-radius: calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0 0;
+    background: #1E2A44;
+    color: #ECEEF0;
+}
+
+.week-calendar .weekday.today h3 {
+    box-shadow: inset 0 -4px 0 #E9B820;
+}
+
+.week-calendar a.event.available {
+    --status-bg-color: color-mix(in srgb, var(--tipo, #2A7F48) 9%, var(--vw-event-bg));
+}
+
+@media (prefers-color-scheme: dark) {
+    .week-calendar .weekday h3 {
+        background: #283860;
+    }
+}
+
+@media (max-width: 767px) {
+    .week-calendar .weekday h3 {
+        margin: 0;
+        border-radius: calc(var(--vw-radius) * 0.7);
+    }
+
+    .week-calendar details[open] .weekday-summary h3,
+    .week-calendar details[open] > summary h3 {
+        border-radius: calc(var(--vw-radius) * 0.7) calc(var(--vw-radius) * 0.7) 0 0;
+    }
 }
 
 /* The name of the studio, as on its website, at the size of a heading: the diary first (Kimi, 9 November 2026). */
